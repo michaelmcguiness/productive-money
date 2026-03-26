@@ -506,6 +506,10 @@ export default function ProductiveMoney() {
           font-weight: 700; line-height: 1.05; letter-spacing: -2px;
           color: #fff; opacity: 0; animation: fadeUp 0.7s ease 0.35s forwards;
         }
+        .pm-hero-title-break { display: none; }
+        @media (min-width: 601px) {
+          .pm-hero-title-break { display: block; }
+        }
         .pm-hero-title-accent {
           background: linear-gradient(135deg, #8294fc, #b8c4ff);
           -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -691,10 +695,10 @@ export default function ProductiveMoney() {
       </nav>
       {/* HERO */}
       <section className="pm-hero" id="hero">
-        <div className="pm-hero-overline">An Etherealize x Bitmine Research Paper</div>
+        <div className="pm-hero-overline">A Whitepaper By<br />Etherealize x Bitmine</div>
         <div className="pm-hero-eth"><EthDiamond size={36} /></div>
         <h1 className="pm-hero-title">
-          Ethereum and the Era of<br /><span className="pm-hero-title-accent">Productive Money</span>
+          Ethereum and the Era of{" "}<span className="pm-hero-title-break" /><span className="pm-hero-title-accent">Productive Money</span>
         </h1>
         <p className="pm-hero-subtitle">
           {"Ether's monetary properties are superior to gold and Bitcoin. Here's the path to $300,000."}
