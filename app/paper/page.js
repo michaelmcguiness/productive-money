@@ -1,24 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
-function EthDiamond({ size = 32 }) {
-  return (
-    <svg width={size} height={size * 1.63} viewBox="0 0 256 417" fill="none">
-      <path d="M127.961 0L125.166 9.5V285.168L127.961 287.958L255.923 212.32L127.961 0Z" fill="rgba(130,148,252,0.6)" />
-      <path d="M127.962 0L0 212.32L127.962 287.958V154.158V0Z" fill="rgba(130,148,252,0.9)" />
-      <path d="M127.961 312.187L126.386 314.106V412.306L127.961 416.905L255.999 236.587L127.961 312.187Z" fill="rgba(130,148,252,0.6)" />
-      <path d="M127.962 416.905V312.187L0 236.587L127.962 416.905Z" fill="rgba(130,148,252,0.9)" />
-      <path d="M127.961 287.958L255.921 212.32L127.961 154.159V287.958Z" fill="rgba(80,100,200,0.7)" />
-      <path d="M0.001 212.32L127.961 287.958V154.159L0.001 212.32Z" fill="rgba(130,148,252,0.5)" />
-    </svg>
-  );
-}
+import { EthDiamond, ComparisonTable, CompoundingChart, PathToTarget, MarketDataProvider } from "../components";
 
 export default function PaperPage() {
   const router = useRouter();
 
   return (
+    <MarketDataProvider>
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#050510", color: "#e4e4ef", minHeight: "100vh" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400&display=swap');
@@ -41,10 +30,10 @@ export default function PaperPage() {
         .paper-nav-brand-text { font-size: 14px; font-weight: 600; letter-spacing: 0.5px; color: #fff; }
         .paper-nav-brand-sub {
           font-size: 10px; font-weight: 400; letter-spacing: 2px;
-          text-transform: uppercase; color: #5a5b78; margin-left: 2px;
+          text-transform: uppercase; color: #6b6c88; margin-left: 2px;
         }
         .paper-back {
-          font-size: 13px; font-weight: 400; color: #8b8ca7;
+          font-size: 13px; font-weight: 400; color: #9b9cb5;
           background: none; border: none; cursor: pointer; transition: color 0.2s;
         }
         .paper-back:hover { color: #a0b0ff; }
@@ -52,7 +41,7 @@ export default function PaperPage() {
           max-width: 720px; margin: 0 auto; padding: 140px 32px 120px;
         }
         .paper-label {
-          font-size: 11px; font-weight: 600; letter-spacing: 3px;
+          font-size: 12px; font-weight: 600; letter-spacing: 3px;
           text-transform: uppercase; color: #8294fc; margin-bottom: 20px;
         }
         .paper-title {
@@ -66,12 +55,12 @@ export default function PaperPage() {
           background-clip: text;
         }
         .paper-meta {
-          font-size: 13px; color: #5a5b78; margin-bottom: 48px;
+          font-size: 14px; color: #6b6c88; margin-bottom: 48px;
           padding-bottom: 48px; border-bottom: 1px solid rgba(130,148,252,0.08);
         }
         .paper-body {
           font-family: 'EB Garamond', serif;
-          font-size: 19px; line-height: 1.78; color: #b0b1c4;
+          font-size: 20px; line-height: 1.78; color: #c0c1d4;
         }
         .paper-body p { margin-bottom: 28px; }
         .paper-h2 {
@@ -84,7 +73,7 @@ export default function PaperPage() {
           border-left: 2px solid #8294fc;
           padding: 20px 0 20px 28px; margin: 36px 0;
           font-family: 'EB Garamond', serif;
-          font-size: 20px; font-style: italic; line-height: 1.6; color: #e4e4ef;
+          font-size: 21px; font-style: italic; line-height: 1.6; color: #e4e4ef;
         }
         .paper-accent { color: #a0b0ff; font-weight: 500; }
         .paper-ul {
@@ -92,14 +81,14 @@ export default function PaperPage() {
         }
         .paper-ul li {
           position: relative; padding-left: 20px; margin-bottom: 20px;
-          font-family: 'EB Garamond', serif; font-size: 19px; line-height: 1.78; color: #b0b1c4;
+          font-family: 'EB Garamond', serif; font-size: 20px; line-height: 1.78; color: #c0c1d4;
         }
         .paper-ul li::before {
           content: ''; position: absolute; left: 0; top: 12px;
           width: 6px; height: 6px; border-radius: 50%; background: #8294fc;
         }
         .paper-separator {
-          text-align: center; margin: 64px 0; color: #5a5b78; font-size: 20px;
+          text-align: center; margin: 64px 0; color: #6b6c88; font-size: 20px;
           letter-spacing: 8px;
         }
         .paper-closing {
@@ -107,8 +96,8 @@ export default function PaperPage() {
           border-top: 1px solid rgba(130,148,252,0.08);
         }
         .paper-closing-text {
-          font-family: 'EB Garamond', serif; font-size: 20px; font-style: italic;
-          line-height: 1.65; color: #8b8ca7; max-width: 560px; margin: 28px auto 0;
+          font-family: 'EB Garamond', serif; font-size: 21px; font-style: italic;
+          line-height: 1.65; color: #9b9cb5; max-width: 560px; margin: 28px auto 0;
         }
         .paper-footer {
           max-width: 720px; margin: 0 auto; padding: 56px 32px;
@@ -116,9 +105,9 @@ export default function PaperPage() {
           flex-wrap: wrap; gap: 20px;
           border-top: 1px solid rgba(130,148,252,0.08);
         }
-        .paper-footer-left { font-size: 12px; color: #5a5b78; }
+        .paper-footer-left { font-size: 12px; color: #6b6c88; }
         .paper-footer-link {
-          font-size: 12px; color: #5a5b78; background: none;
+          font-size: 12px; color: #6b6c88; background: none;
           border: none; cursor: pointer; transition: color 0.2s;
         }
         .paper-footer-link:hover { color: #8294fc; }
@@ -221,6 +210,10 @@ export default function PaperPage() {
             By Menger{"'"}s criteria, ETH already qualifies as a superior monetary good before the conversation turns to yield. It wins on the attributes that matter most—scarcity, durability, censorship resistance—and matches the rest. <span className="paper-accent">The path to $300,000 begins here:</span> ETH is not merely an alternative monetary asset, but a strictly better one on every traditional axis.
           </p>
 
+          <div style={{ margin: "48px 0" }}>
+            <ComparisonTable />
+          </div>
+
           <h2 className="paper-h2">The Carrying Cost Breakthrough</h2>
 
           <p>
@@ -232,12 +225,14 @@ export default function PaperPage() {
           <p>
             <span className="paper-accent">ETH breaks this tradeoff.</span> When you stake ETH, you are not lending it. There is no borrower, no bank, no counterparty. You lock ETH into the Ethereum protocol{"'"}s consensus mechanism and earn yield from the issuance rewards and transaction fees the network generates. The ETH remains yours. You can unstake and withdraw. The yield is not compensation for counterparty risk—it is compensation for providing security to the network and accepting protocol risk (validators who act maliciously are slashed and lose a portion of their stake). It is capital at risk, but the risk is transparent, algorithmically enforced, and does not depend on the solvency or honesty of any counterparty.
           </p>
-          <p>
-            The current staking yield sits between 2% and 4% annually. A portion comes from organic transaction fees paid by users; the remainder from protocol-level issuance capped at 1.5%. In practice, issuance has hovered around 0.8% because a portion of all fees is permanently burned. Stakers earn real yield while the overall supply remains roughly flat or deflationary.
-          </p>
+ <p>The current staking yield sits between 2% and 4% annually. A portion comes from organic transaction fees paid by users; the remainder from protocol-level issuance. In practice, net issuance has hovered around 0.8% because a portion of all fees is permanently burned. A sophisticated reader might raise an objection here: isn't staking yield just inflation? If the protocol issues new ETH to pay stakers, non-stakers are being diluted — the same way a company issuing new shares to fund a dividend isn't generating a return, just transferring value. This objection is wrong for two reasons. First, issuance is offset by Ethereum's burn mechanism: every transaction destroys ETH, and when usage is high enough, burns exceed issuance and the total supply shrinks (similar to funding share buybacks with profits). Second, a meaningful portion of staking yield is funded by transaction fees (similar to funding dividends with profits). And unlike a corporation or central bank, ETH issuance is capped by the protocol at 1.5% and cannot be changed by any individual, board, or committee.</p>
           <p>
             This is the categorical change. ETH does not need the carrying cost argument to qualify as money—it qualifies on the traditional attributes alone. The negative carrying cost is what makes it <span className="paper-accent">strictly better money</span>: a monetary good that matches its competitors on every traditional attribute and then compounds without counterparty risk. No monetary good in history has offered this. The path to $300,000 depends on this being understood: ETH is not a technology bet. It is a superior monetary asset with an economic property that gold and Bitcoin strictly cannot replicate: it compounds.
           </p>
+
+          <div style={{ margin: "48px 0" }}>
+            <CompoundingChart id="paper" />
+          </div>
 
           <h2 className="paper-h2">The Toll Road to Tokenization</h2>
 
@@ -245,7 +240,7 @@ export default function PaperPage() {
             Buffett loves businesses that sit at a chokepoint of economic activity and collect a fee on everything that passes through. {"\u201C"}In an inflationary world,{"\u201D"} he has said, {"\u201C"}a toll bridge would be a great thing to own because you{"'"}ve laid out the capital costs. You built it in old dollars and you don{"'"}t have to keep replacing it.{"\u201D"} BlackRock—the world{"'"}s largest asset manager, with $14 trillion under management—has adopted the same metaphor for Ethereum, calling it {"\u201C"}the toll road to tokenization{"\u201D"} in a presentation at Davos.
           </p>
           <p>
-            Ethereum is the largest toll road in decentralized finance. More than 65% of all tokenized real-world assets—money market funds, equities, credit—are issued on Ethereum, because institutions choose the most secure settlement layer for assets that matter. In 2025, Ethereum settled over $18.8 trillion in stablecoin transactions alone, which is more than Visa processes annually. Every transaction pays a fee. A portion is burned, and the rest goes to stakers. The more assets issued, the more traffic, the more ETH earns, and the scarcer it becomes.
+            Ethereum is the largest toll road in decentralized finance. More than 65% of all tokenized real-world assets<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>1</sup>—money market funds, equities, credit—are issued on Ethereum, because institutions choose the most secure settlement layer for assets that matter. In 2025, Ethereum settled over $18.8 trillion in stablecoin transactions alone<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>2</sup>, which is more than Visa processes annually. Every transaction pays a fee. A portion is burned, and the rest goes to stakers. The more assets issued, the more traffic, the more ETH earns, and the scarcer it becomes.
           </p>
           <p>
             But ETH is not just the toll road—it is also the collateral that the financial system on the other side of the bridge runs on. Across lending protocols, derivatives markets, and liquidity pools, ETH is the dominant asset that borrowers post, that liquidity providers deposit, that the system demands as its margin of safety. It is the most widely used collateral on Aave, the primary asset backing decentralized stablecoins like DAI, and the base pair for the majority of decentralized exchange liquidity. The bigger the system grows, the more ETH gets locked up.
@@ -254,7 +249,7 @@ export default function PaperPage() {
             Gold can serve as collateral, but the process is slow, expensive, and dependent on trusted intermediaries. You cannot programmatically liquidate a gold position in twelve seconds. You cannot compose gold into layered financial instruments that settle atomically. You cannot use gold as collateral simultaneously in three different lending markets without physically moving it. ETH does all of this natively. It is programmable collateral. And because every operation consumes gas, the collateral function and the value accrual function are the same loop.
           </p>
           <p>
-            In total, ETH has three independent sources of structural demand that remove it from free circulation. <span className="paper-accent">Staking demand:</span> ~29% of all ETH is locked to secure the network. <span className="paper-accent">Collateral demand:</span> the decentralized financial system uses ETH as foundational collateral given that it{"'"}s the only asset native to the network without counterparty risk. <span className="paper-accent">Gas demand:</span> every transaction requires ETH, and a portion is permanently burned.
+            In total, ETH has three independent sources of structural demand that remove it from free circulation. <span className="paper-accent">Staking demand:</span> ~29% of all ETH is locked to secure the network<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>3</sup>. <span className="paper-accent">Collateral demand:</span> the decentralized financial system uses ETH as foundational collateral given that it{"'"}s the only asset native to the network without counterparty risk. <span className="paper-accent">Gas demand:</span> every transaction requires ETH, and a portion is permanently burned.
           </p>
           <p>
             Other monetary assets have demand drivers that lock up supply—gold sits in central bank vaults and temple jewelry. But ETH{"'"}s demand drivers are different in three ways. First, they are native to its monetary function: you need ETH because it is the money of the system. Second, they scale proportionally with the financial system built on Ethereum. Third, one of them permanently destroys supply. Gold jewelry can be melted down. Central bank reserves can be sold. But burned ETH is gone forever.
@@ -302,7 +297,7 @@ export default function PaperPage() {
             The demonetization of silver began in the 1870s, driven by a convergence of forces. Massive silver deposits discovered in the American West were flooding the market with new supply, undermining silver{"'"}s scarcity. Germany abandoned silver for a gold standard after its unification in 1871, dumping its reserves onto global markets. The United States followed with the Coinage Act of 1873. Advances in banking and telecommunications then eliminated silver{"'"}s last remaining advantage: paper banknotes and telegraphic transfers backed by gold made it practical for everyday settlement, removing the need to physically divide it for small transactions. One by one, the major economies coordinated on gold, and silver{"'"}s monetary premium collapsed. The gold-to-silver ratio went from 1:15 to 1:80.
           </p>
           <p>
-            The consequences for nations that held the wrong money were catastrophic. China had used silver as its monetary standard for centuries and did not follow the West{"'"}s transition to gold. As silver{"'"}s monetary premium evaporated over the following decades, China{"'"}s currency lost over 80% of its international purchasing power. The country could no longer service its foreign debts, which were denominated in gold. In 1935, China was forced to abandon silver entirely and introduce a fiat currency, just as it was entering two devastating wars. The government printed money to fund the military, hyperinflation followed, and it became clear to the world that you cannot insulate yourself from the consequences of others holding better money than yours.
+            The consequences for nations that held the wrong money were catastrophic. China had used silver as its monetary standard for centuries and did not follow the West{"'"}s transition to gold. As silver{"'"}s monetary premium evaporated over the following decades, China{"'"}s currency lost over 80% of its international purchasing power. The country could no longer service its foreign debts, which were denominated in gold. In 1935, China was forced to abandon silver entirely and introduce a fiat currency, just as it was entering two devastating wars. The government printed money to fund the military, hyperinflation followed<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>4</sup>, and it became clear to the world that you cannot insulate yourself from the consequences of others holding better money than yours.
           </p>
           <p>
             Monetary standards are Nash equilibria. The cost of remaining on an inferior standard rises as adoption of the superior standard grows. Silver holders in the 1870s couldn{"'"}t simply decide to keep using silver. Once enough of the world moved to gold, silver{"'"}s monetary premium vanished whether you believed in silver or not.
@@ -323,17 +318,17 @@ export default function PaperPage() {
             This is not a theoretical concern. What matters for a monetary network is not absolute security but relative security: security as a proportion of the value being secured. It{"'"}s similar to why countries of all sizes maintain roughly similar military budgets as a percentage of GDP. A $20 trillion Bitcoin network would attract nation-state-level adversaries, yet its proof-of-work security budget when the block reward reaches zero will be a fraction of what it is today. The cost of attack divided by market cap is the correct measure, and on that measure, Bitcoin{"'"}s security deteriorates with every halving.
           </p>
           <p>
-            The vulnerability is even more stark when measured by hardware cost. The cost to attack Bitcoin is not the annual security budget but the cost to acquire sufficient mining hardware to control 51% of the network{"'"}s hashrate. At current hashrates and ASIC prices, the total replacement cost of all Bitcoin mining hardware is estimated at roughly $6 billion. For context, several individual technology companies now spend more than that in a single quarter on computing infrastructure alone. As Bitcoin{"'"}s block reward continues to halve, the cost of attack may stagnate—even as the value it is supposed to protect grows.
+            The vulnerability is even more stark when measured by hardware cost. The cost to attack Bitcoin is not the annual security budget but the cost to acquire sufficient mining hardware to control 51% of the network{"'"}s hashrate. At current hashrates and ASIC prices, the total replacement cost of all Bitcoin mining hardware is estimated at roughly $6 billion<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>5</sup>. For context, several individual technology companies now spend more than that in a single quarter on computing infrastructure alone. As Bitcoin{"'"}s block reward continues to halve, the cost of attack may stagnate—even as the value it is supposed to protect grows.
           </p>
           <p>
-            <span className="paper-accent">Ethereum{"'"}s security model works differently.</span> Attacking Ethereum would require acquiring roughly a third of all staked ETH—currently over $24 billion—and the attacker{"'"}s stake would be slashed, meaning the capital is destroyed in the attempt. This cost scales directly with the network{"'"}s value: if ETH{"'"}s market cap doubles, the cost to attack it doubles. Bitcoin has no equivalent mechanism. If Bitcoin{"'"}s market cap doubles, the cost to attack it stays the same until miners independently invest in more hardware—which they will only do if the economics justify it, and the halving schedule is making the economics worse every four years. Where Bitcoin burns energy, Ethereum deploys capital productively. One model inefficiently destroys resources, while the other compounds them. For a monetary asset competing for a monetary premium worth $36 trillion, the durability of the security model is the foundation on which the entire value proposition rests.
+            <span className="paper-accent">Ethereum{"'"}s security model works differently.</span> Attacking Ethereum would require acquiring roughly a third of all staked ETH—currently over $24 billion<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>6</sup>—and the attacker{"'"}s stake would be slashed, meaning the capital is destroyed in the attempt. This cost scales directly with the network{"'"}s value: if ETH{"'"}s market cap doubles, the cost to attack it doubles. Bitcoin has no equivalent mechanism. If Bitcoin{"'"}s market cap doubles, the cost to attack it stays the same until miners independently invest in more hardware—which they will only do if the economics justify it, and the halving schedule is making the economics worse every four years. Where Bitcoin burns energy, Ethereum deploys capital productively. One model inefficiently destroys resources, while the other compounds them. For a monetary asset competing for a monetary premium worth $36 trillion, the durability of the security model is the foundation on which the entire value proposition rests.
           </p>
           <p>
             If Bitcoin{"'"}s fee revenue does not grow by several orders of magnitude, there are two candidate solutions: add tail issuance, which breaks the 21 million cap, or switch to proof of stake. Both are cultural non-starters for the Bitcoin community. As Vitalik Buterin observed in his reflections on the block size war:
           </p>
 
           <div className="paper-blockquote">
-            {"\u201C"}The ultimate diffuser of political tension is not compromise, but rather new technology: the discovery of fundamentally new approaches that give both sides more of what they want at the same time. When an ecosystem stops embracing new technology, it inevitably stagnates, and becomes more contentious at the same time.{"\u201D"}
+            {"\u201C"}The ultimate diffuser of political tension is not compromise, but rather new technology: the discovery of fundamentally new approaches that give both sides more of what they want at the same time. When an ecosystem stops embracing new technology, it inevitably stagnates, and becomes more contentious at the same time.<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>7</sup>{"\u201D"}
           </div>
 
           <p>
@@ -354,8 +349,13 @@ export default function PaperPage() {
           <p>
             The market still treats ETH as a technology bet, but if the arguments in this report are correct—if ETH is superior money by the criteria of Menger on saleability and Buffett on productivity—then the logical endpoint is that ETH captures the monetary premium currently held by both gold and Bitcoin. The arithmetic: <span className="paper-accent">$36 trillion divided by ~120 million ETH equals approximately $300,000 per ETH.</span> Gold and Bitcoin would likely retain some residual value, just as silver did. But the vast majority of the monetary premium migrates to the superior asset.
           </p>
+
+          <div style={{ margin: "48px 0" }}>
+            <PathToTarget id="paper" />
+          </div>
+
           <p>
-            The addressable market is also growing. The United States carries over $38 trillion in national debt, with interest payments approaching $1 trillion annually. The debt-to-GDP ratio has risen from 56% in 2000 to roughly 125% today. Every fiat currency in history has followed the same arc: initial stability, then moderate inflation, then ruinous debasement. The dollar is 55 years into that arc. As the fiat system deteriorates, the total addressable market for non-sovereign money expands with every trillion in new debt.
+            The addressable market is also growing. The United States carries over $38 trillion in national debt, with interest payments approaching $1 trillion annually. The debt-to-GDP ratio has risen from 56% in 2000 to roughly 125% today<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>8</sup>. Every fiat currency in history has followed the same arc: initial stability, then moderate inflation, then ruinous debasement. The dollar is 55 years into that arc. As the fiat system deteriorates, the total addressable market for non-sovereign money expands with every trillion in new debt.
           </p>
           <p>
             $36 trillion may be conservative. A significant portion of the value embedded in global real estate, government bonds, and equities is not productive value but monetary premium in disguise. A Manhattan apartment trading at a 2% cap rate is not being priced as a rental business; it is being priced as a store of value with a small yield attached. The {"\u201C"}convenience yield{"\u201D"} on U.S. Treasuries exists because trillions in demand comes from institutions that need safe collateral, not yield. If a superior monetary asset emerged—scarce, productive, self-custodied, without counterparty risk—some fraction of that embedded premium, measured in the tens of trillions, would migrate. Enough to make $36 trillion look like a floor.
@@ -366,7 +366,7 @@ export default function PaperPage() {
 
           <div className="paper-separator">{"\u2736  \u2736  \u2736"}</div>
 
-          <p style={{ fontStyle: "italic", textAlign: "center", color: "#8b8ca7" }}>
+          <p style={{ fontStyle: "italic", textAlign: "center", color: "#9b9cb5" }}>
             If you own one ounce of gold for an eternity, you will still own one ounce at its end. If you own one bitcoin for an eternity, you will still own one bitcoin at its end. If you stake one ETH for an eternity, you will own considerably more ETH at its end.
           </p>
 
@@ -377,6 +377,22 @@ export default function PaperPage() {
             </p>
           </div>
         </div>
+
+          <div style={{ marginTop: "64px", paddingTop: "32px", borderTop: "1px solid rgba(130,148,252,0.08)" }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#8294fc", marginBottom: "20px", fontFamily: "'Inter', sans-serif" }}>
+              Sources
+            </div>
+            <ol style={{ margin: 0, padding: "0 0 0 20px", fontFamily: "'Inter', sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#6b6c88" }}>
+              <li>RWA.xyz analytics dashboard. Nasdaq/Motley Fool (Jan 8, 2026): {"\u201C"}rwa.xyz shows Ethereum has about 65% of the total value in distributed RWA on chain.{"\u201D"} KuCoin Research independently confirms.</li>
+              <li>Stablecoin settlement volume data from DefiLlama and Artemis Analytics. Note: this figure represents total on-chain transfer volume, not unique economic transactions.</li>
+              <li>Dune Analytics (hildobby dashboard); Compass Staking Yield Reference Index, as of early 2026. Approximately 35.8M ETH staked, representing ~29% of circulating supply.</li>
+              <li>Friedman, M., {"\u201C"}Franklin D. Roosevelt, Silver, and China,{"\u201D"} <em>Journal of Political Economy</em>, Vol. 100, No. 1 (1992). Also: Rawski, T., <em>Economic Growth in Prewar China</em> (1989).</li>
+              <li>Calculated from current network hashrate (~912 EH/s) at ~$6,695/PH (Antminer S23 pricing). Source: CoinWarz Bitcoin Hashrate Chart, March 2026.</li>
+              <li>Calculated from ~35.8M ETH staked {"\u00D7"} 33% threshold {"\u00D7"} ~$2,000/ETH. Attacker{"'"}s stake is slashed (destroyed) upon attack attempt.</li>
+              <li>Buterin, V., blog post on the Bitcoin block size war. See vitalik.eth.limo.</li>
+              <li>U.S. Treasury, TreasuryDirect.gov (debt {">"}$38T); Congressional Budget Office (interest approaching $1T); Federal Reserve Economic Data/FRED (debt-to-GDP ~125%, vs. 56% in 2000).</li>
+            </ol>
+          </div>
       </article>
 
       <footer className="paper-footer">
@@ -386,5 +402,6 @@ export default function PaperPage() {
         </button>
       </footer>
     </div>
+    </MarketDataProvider>
   );
 }
