@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { EthDiamond, ComparisonTable, CompoundingChart, PathToTarget, LiveDashboard, MarketDataProvider, useMarketData, ShareFab } from "./components";
+import { EthDiamond, ComparisonTable, CompoundingChart, PathToTarget, LiveDashboard, MarketDataProvider, useMarketData, ShareFab, SubscribeBox } from "./components";
 const NAV_LINKS = [
   { label: "Thesis", href: "#thesis" },
   { label: "Dashboard", href: "#dashboard" },
@@ -96,7 +96,7 @@ export default function ProductiveMoney() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [expandedFaq, setExpandedFaq] = useState(null);
-  const [email, setEmail] = useState("");
+
   useEffect(() => {
     const handleScroll = () => {
       const sectionIds = ["hero","thesis","dashboard","faq","about","ai","subscribe"];
@@ -492,20 +492,8 @@ export default function ProductiveMoney() {
         </div>
       </section>
       {/* SUBSCRIBE */}
-      <section className="pm-section" id="subscribe" style={{ textAlign: "center" }}>
-        <div className="pm-label" style={{ display: "flex", justifyContent: "center" }}>Stay Updated</div>
-        <h2 className="pm-heading">Subscribe for Updates</h2>
-        <div className="pm-sub-box">
-          <p style={{ fontSize: "15px", color: "#8b8ca7", lineHeight: 1.65 }}>
-            The research you need to understand Ethereum and the future of finance from the Etherealize team.
-          </p>
-          <div className="pm-sub-row">
-            <input type="email" className="pm-sub-input" placeholder="you@example.com"
-              value={email} onChange={e => setEmail(e.target.value)} />
-            <button className="pm-sub-btn">Subscribe</button>
-          </div>
-          <div className="pm-sub-note">Powered by Substack · No spam, unsubscribe anytime</div>
-        </div>
+      <section className="pm-section" id="subscribe">
+        <SubscribeBox />
       </section>
       {/* CLOSING */}
       <div style={{ textAlign: "center", padding: "64px 32px 32px", maxWidth: "560px", margin: "0 auto" }}>

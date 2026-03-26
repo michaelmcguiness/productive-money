@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { EthDiamond, ComparisonTable, CompoundingChart, PathToTarget, MarketDataProvider } from "../components";
+import { EthDiamond, ComparisonTable, PathToTarget, MarketDataProvider, SubscribeBox } from "../components";
 
 export default function PaperPage() {
   const router = useRouter();
@@ -174,6 +174,10 @@ export default function PaperPage() {
             <span className="paper-accent">ETH dissolves this distinction.</span> It generates a return simply from being held and staked. One ETH staked today will be more than one ETH a year from now. That alone disqualifies it from Buffett{"'"}s criticism of gold. The question is whether this property, combined with ETH{"'"}s other monetary attributes, is sufficient to capture the $36 trillion monetary premium currently held by gold and Bitcoin. The rest of this report makes the case that it is.
           </p>
 
+          <div style={{ margin: "48px 0" }}>
+            <PathToTarget id="paper" />
+          </div>
+
           <h2 className="paper-h2">Better Money by Every Measure</h2>
 
           <p>
@@ -231,9 +235,6 @@ export default function PaperPage() {
             This is the categorical change. ETH does not need the carrying cost argument to qualify as money—it qualifies on the traditional attributes alone. The negative carrying cost is what makes it <span className="paper-accent">strictly better money</span>: a monetary good that matches its competitors on every traditional attribute and then compounds without counterparty risk. No monetary good in history has offered this. The path to $300,000 depends on this being understood: ETH is not a technology bet. It is a superior monetary asset with an economic property that gold and Bitcoin strictly cannot replicate: it compounds.
           </p>
 
-          <div style={{ margin: "48px 0" }}>
-            <CompoundingChart id="paper" />
-          </div>
 
           <h2 className="paper-h2">The Toll Road to Tokenization</h2>
 
@@ -351,10 +352,6 @@ export default function PaperPage() {
             The market still treats ETH as a technology bet, but if the arguments in this report are correct—if ETH is superior money by the criteria of Menger on saleability and Buffett on productivity—then the logical endpoint is that ETH captures the monetary premium currently held by both gold and Bitcoin. The arithmetic: <span className="paper-accent">$36 trillion divided by ~120 million ETH equals approximately $300,000 per ETH.</span> Gold and Bitcoin would likely retain some residual value, just as silver did. But the vast majority of the monetary premium migrates to the superior asset.
           </p>
 
-          <div style={{ margin: "48px 0" }}>
-            <PathToTarget id="paper" />
-          </div>
-
           <p>
             The addressable market is also growing. The United States carries over $38 trillion in national debt, with interest payments approaching $1 trillion annually. The debt-to-GDP ratio has risen from 56% in 2000 to roughly 125% today<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>8</sup>. Every fiat currency in history has followed the same arc: initial stability, then moderate inflation, then ruinous debasement. The dollar is 55 years into that arc. As the fiat system deteriorates, the total addressable market for non-sovereign money expands with every trillion in new debt.
           </p>
@@ -395,6 +392,10 @@ export default function PaperPage() {
             </ol>
           </div>
       </article>
+
+      <div style={{ maxWidth: "720px", margin: "0 auto", padding: "80px 32px 0" }}>
+        <SubscribeBox />
+      </div>
 
       <footer className="paper-footer">
         <div className="paper-footer-left">{"\u00A9"} 2026 <a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a> × <a href="https://www.bitminetech.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Bitmine</a></div>

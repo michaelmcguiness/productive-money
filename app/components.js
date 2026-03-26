@@ -881,13 +881,13 @@ export function LiveDashboard() {
   );
 }
 
-const SHARE_TEXT = "\u201CEthereum and the Era of Productive Money\u201D - Why ETH is better money than gold and Bitcoin by every measure.\n\nRead the new whitepaper from @Etherealize_io & @BitMNR explaining their $300,000 per ETH price target.";
-
 export function ShareFab() {
+  const ctx = useMarketData();
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const fabRef = useRef(null);
+  const priceTarget = ctx?.data ? "$" + Math.round(ctx.data.combinedParityPrice).toLocaleString() : "$300,000";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -917,19 +917,23 @@ export function ShareFab() {
     } catch { /* fallback */ }
   };
 
+  const xText = `\u201CEthereum and the Era of Productive Money\u201D - Why ETH is better money than gold and Bitcoin by every measure.\n\nRead the new whitepaper from @Etherealize_io & @BitMNR explaining their ${priceTarget} per ETH price target.`;
+
   const shareX = () => {
     window.open(
-      `https://x.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(url)}`,
+      `https://x.com/intent/tweet?text=${encodeURIComponent(xText)}&url=${encodeURIComponent(url)}`,
       "_blank", "noopener,noreferrer"
     );
     setOpen(false);
   };
 
+  const liText = `\u201CEthereum and the Era of Productive Money\u201D \u2014 Why ETH is better money than gold and Bitcoin by every measure.\n\nRead the new whitepaper from @Etherealize and @Bitmine Immersion Technologies (BMNR) explaining their ${priceTarget} per ETH price target.\n\n${url}`;
+
   const shareLinkedIn = () => {
-    const linkedInUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(
-      "\u201CEthereum and the Era of Productive Money\u201D \u2014 Why ETH is better money than gold and Bitcoin by every measure.\n\nRead the new whitepaper from Etherealize and Bitmine explaining their $300,000 per ETH price target.\n\n" + url
-    )}`;
-    window.open(linkedInUrl, "_blank", "noopener,noreferrer");
+    window.open(
+      `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(liText)}`,
+      "_blank", "noopener,noreferrer"
+    );
     setOpen(false);
   };
 
@@ -1013,6 +1017,60 @@ export function ShareFab() {
           <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
         </svg>
       </button>
+    </div>
+  );
+}
+
+export function SubscribeBox() {
+  const [email, setEmail] = useState("");
+  return (
+    <div style={{ textAlign: "center" }}>
+      <style>{`
+        .sub-box { max-width: 520px; margin: 0 auto; }
+        .sub-row { display: flex; gap: 0; margin-top: 24px; border-radius: 4px; overflow: hidden; }
+        .sub-input {
+          flex: 1; font-family: 'Inter', sans-serif; font-size: 14px;
+          padding: 14px 18px; background: #0d0e20;
+          border: 1px solid rgba(130,148,252,0.08); border-right: none;
+          color: #e4e4ef; outline: none; border-radius: 4px 0 0 4px;
+        }
+        .sub-input::placeholder { color: #6b6c88; }
+        .sub-input:focus { border-color: #8294fc; background: rgba(130,148,252,0.04); }
+        .sub-btn {
+          font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+          color: #050510; background: #8294fc;
+          border: 1px solid #8294fc; padding: 14px 24px;
+          cursor: pointer; transition: all 0.2s; white-space: nowrap;
+          border-radius: 0 4px 4px 0;
+        }
+        .sub-btn:hover { background: #a0b0ff; }
+        @media (max-width: 600px) {
+          .sub-row { flex-direction: column; }
+          .sub-input { border-right: 1px solid rgba(130,148,252,0.08); border-bottom: none; border-radius: 4px 4px 0 0; }
+          .sub-btn { border-radius: 0 0 4px 4px; }
+        }
+      `}</style>
+      <div style={{
+        fontSize: "12px", fontWeight: 600, letterSpacing: "3px",
+        textTransform: "uppercase", color: "#8294fc", marginBottom: "16px",
+      }}>Stay Updated</div>
+      <div style={{
+        fontSize: "22px", fontWeight: 700, color: "#fff", marginBottom: "20px",
+        letterSpacing: "-0.5px",
+      }}>Subscribe for Updates</div>
+      <div className="sub-box">
+        <p style={{ fontSize: "15px", color: "#9b9cb5", lineHeight: 1.65 }}>
+          The research you need to understand Ethereum and the future of finance from the Etherealize team.
+        </p>
+        <div className="sub-row">
+          <input type="email" className="sub-input" placeholder="you@example.com"
+            value={email} onChange={e => setEmail(e.target.value)} />
+          <button className="sub-btn">Subscribe</button>
+        </div>
+        <div style={{ fontSize: "13px", color: "#6b6c88", marginTop: "14px" }}>
+          Powered by Substack · No spam, unsubscribe anytime
+        </div>
+      </div>
     </div>
   );
 }
