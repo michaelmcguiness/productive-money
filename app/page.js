@@ -11,16 +11,8 @@ const NAV_LINKS = [
 ];
 const FAQ_DATA = [
   {
-    q: "Why not Solana?",
-    a: "Solana optimizes for speed at the cost of decentralization. Its validator set is small and hardware requirements are high, making it structurally dependent on a narrow set of operators. For a monetary asset competing for a $36 trillion premium, the security model must be credibly neutral and resistant to capture. Solana is a fast database. Ethereum is a settlement layer."
-  },
-  {
-    q: "Why not Cardano?",
-    a: "Cardano has not produced a meaningful DeFi ecosystem. The intrinsic value floor argument depends on real economic activity generating real fees. Cardano's TVL is a rounding error relative to Ethereum's. Without the flywheel of usage → fees → burn → scarcity, the monetary premium argument has no foundation."
-  },
-  {
-    q: "Why not XRP / Ripple?",
-    a: "XRP is a centrally controlled token distributed by a corporation. It fails the most basic test of monetary credibility: permissionlessness. The XRP Ledger's consensus mechanism relies on a curated list of trusted validators. This is not money—it's a corporate payment rail with a token attached."
+    q: "Why not Solana, Cardano, or another L1?",
+    a: "The productive money thesis is not an argument that smart contract platforms are valuable. It is an argument about one specific asset on one specific network. Ethereum is the most decentralized smart contract platform in existence \u2014 over 900,000 validators operated by tens of thousands of independent entities across dozens of countries. That decentralization is what makes ETH credibly neutral: no single party, government, or coalition can alter its monetary policy. This is not a nice-to-have \u2014 it is the definition of what makes something money rather than a platform token. Ethereum also has a network effect moat that no competitor has come close to challenging: over 65% of tokenized real-world assets, the vast majority of DeFi liquidity, the deepest collateral markets, and more developers than every other chain combined. These network effects are self-reinforcing \u2014 institutions tokenize on Ethereum because that\u2019s where the liquidity is, and the liquidity is there because that\u2019s where institutions tokenize. A competing L1 would need to simultaneously replicate Ethereum\u2019s decentralization, security budget, developer ecosystem, DeFi liquidity, institutional adoption, and credible neutrality. No chain has done this. The history of monetary competition suggests none will \u2014 monetary network effects tend toward winner-take-most."
   },
   {
     q: "Isn't ETH just a tech stock?",
