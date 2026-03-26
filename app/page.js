@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { EthDiamond, ComparisonTable, CompoundingChart, PathToTarget, LiveDashboard, MarketDataProvider, useMarketData } from "./components";
+import { EthDiamond, ComparisonTable, CompoundingChart, PathToTarget, LiveDashboard, MarketDataProvider, useMarketData, ShareFab } from "./components";
 const NAV_LINKS = [
   { label: "Thesis", href: "#thesis" },
   { label: "Dashboard", href: "#dashboard" },
@@ -12,12 +12,16 @@ const NAV_LINKS = [
 ];
 const FAQ_DATA = [
   {
-    q: "Why not Solana, Cardano, or another L1?",
-    a: "For an asset to function as money, it must be credibly neutral — no single party, government, or coalition can alter its monetary policy. Ethereum has over 900,000 validators operated by tens of thousands of independent entities across dozens of countries. No other smart contract platform comes close to this level of decentralization. Beyond decentralization, Ethereum has network effects that are self-reinforcing and likely insurmountable: over 65% of tokenized real-world assets, the deepest DeFi liquidity, and more developers than every other chain combined. Institutions tokenize on Ethereum because that's where the liquidity is, and the liquidity is there because that's where institutions tokenize. A competitor would need to simultaneously replicate Ethereum's decentralization, liquidity, institutional adoption, and developer ecosystem. In the last 10 years, no competitor has come close."
+    q: "Isn't staking yield just inflation?",
+    a: "If the protocol issues new ETH to pay stakers, isn't that just dilution? Two things make this wrong. First, Ethereum's burn mechanism destroys ETH with every transaction — when usage is high enough, burns exceed issuance and total supply shrinks, similar to funding share buybacks with profits. Second, a meaningful portion of staking yield is funded by transaction fees, similar to funding dividends with profits. And unlike a corporation or central bank, ETH issuance is capped by the protocol at 1.5% and cannot be changed by any individual, board, or committee."
   },
   {
-    q: "Why not buy the S&P 500?",
-    a: "ETH is a bearer instrument—whoever holds it, owns it. It has no board of directors, no earnings calls, no CEO. It cannot be diluted by share issuance or debased by management decisions. It is programmable, self-custodied, censorship-resistant money that also generates yield. The S&P 500 is a wonderful productive asset, but it is not money. ETH is both."
+    q: "Why not just buy the S&P 500?",
+    a: "Because the S&P 500 is not money. Every dollar of S&P 500 value is a claim on a counterparty — a corporation that can go bankrupt, a broker that can fail, a clearinghouse that can freeze your shares. ETH is a bearer instrument: whoever holds it, owns it. It is self-custodied, censorship-resistant, dependent on no corporation, broker, or government — and it compounds. The S&P 500 is a wonderful productive asset, but it is not money. ETH is both."
+  },
+  {
+    q: "Why not Solana, Cardano, or another L1?",
+    a: "For an asset to function as money, it must be credibly neutral — no single party, government, or coalition can alter its monetary policy. Ethereum has over 900,000 validators operated by tens of thousands of independent entities across dozens of countries. No other smart contract platform comes close. Beyond decentralization, Ethereum has self-reinforcing network effects: over 65% of tokenized real-world assets, the deepest DeFi liquidity, and more developers than every other chain combined. Institutions tokenize on Ethereum because that's where the liquidity is, and the liquidity is there because that's where institutions tokenize. In the last 10 years, no competitor has come close."
   },
   {
     q: "What about Ethereum's scaling challenges?",
@@ -25,8 +29,13 @@ const FAQ_DATA = [
   },
   {
     q: "How is staking yield different from a bond?",
-    a: "A bond is a loan to a counterparty. If the counterparty defaults, you lose your principal. Staking is not lending—there is no borrower. You lock ETH into the protocol's consensus mechanism and earn yield from issuance and transaction fees. The ETH remains yours. The risk is protocol risk (slashing, bugs), not counterparty risk."
+    a: "A bond is a loan to a counterparty. If the counterparty defaults, you lose your principal. Staking is not lending — there is no borrower. You lock ETH into the protocol's consensus mechanism and earn yield from the network itself. The ETH remains yours. The risk is protocol risk (slashing, bugs), not counterparty risk. This distinction is the core of the productive money thesis."
   },
+    {
+    q: "What are the principal risks to the thesis?",
+    a: "Three. Regulatory: governments could restrict DeFi activity or staking. Competitive: a superior smart contract platform could emerge, though none has in ten years. Technical: a critical protocol bug could undermine confidence. The paper does not claim the repricing is inevitable — it claims the repricing is logically consistent given the monetary properties of ETH, and that the direction of travel favors productive money over dead capital."
+  }
+
 ];
 function fmtT(n) {
   if (n == null) return "\u2014";
@@ -333,6 +342,7 @@ export default function ProductiveMoney() {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        a[target="_blank"]:hover { text-decoration: underline !important; }
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #050510; }
         ::-webkit-scrollbar-thumb { background: rgba(130,148,252,0.2); border-radius: 3px; }
@@ -357,7 +367,7 @@ export default function ProductiveMoney() {
             <EthDiamond size={14} />
             <div>
               <span className="pm-nav-brand-text">Productive Money</span>
-              <span className="pm-nav-brand-sub"> — Etherealize</span>
+              <span className="pm-nav-brand-sub"> — <a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a></span>
             </div>
           </div>
           <div className={`pm-nav-links ${menuOpen ? 'open' : ''}`}>
@@ -376,7 +386,7 @@ export default function ProductiveMoney() {
       </nav>
       {/* HERO */}
       <section className="pm-hero" id="hero">
-        <div className="pm-hero-overline">A Whitepaper By<br />Etherealize x Bitmine</div>
+        <div className="pm-hero-overline">A Whitepaper By<br /><a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a> x <a href="https://www.bitminetech.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Bitmine</a></div>
         <div className="pm-hero-eth"><EthDiamond size={36} /></div>
         <h1 className="pm-hero-title">
           Ethereum and the Era of{" "}<span className="pm-hero-title-break" /><span className="pm-hero-title-accent">Productive Money</span>
@@ -387,7 +397,7 @@ export default function ProductiveMoney() {
         <div className="pm-hero-ctas">
           <button className="pm-btn-primary" onClick={() => scrollTo("thesis")}>The Thesis</button>
           <button className="pm-btn-ghost" onClick={() => router.push("/paper")}>Read the Whitepaper</button>
-          <button className="pm-btn-ghost">Download PDF</button>
+
         </div>
 
         <div style={{
@@ -449,18 +459,18 @@ export default function ProductiveMoney() {
         <h2 className="pm-heading">{"Why \u201CProductive Money\u201D?"}</h2>
         <div className="pm-body">
           <p>
-            {"The Ethereum community has a narrative problem. Bitcoin has \u201Cdigital gold\u201D\u2014two words everyone understands. Ethereum has ultrasound money, world computer, digital oil, programmable money, the internet bond. The community changes the metaphor every six months, and each competes with the last."}
+            {"Bitcoin has \u201Cdigital gold.\u201D Two words everyone understands. Ethereum has ultrasound money, world computer, digital oil, programmable money, the internet bond\u2014a new metaphor every six months, each competing with the last. When an outsider asks \u201Cwhat is ETH?\u201D, the Ethereum community gives six different answers. Bitcoin gives one."}
           </p>
           <p>
             <span className="pm-accent-text">{"\u201CProductive money\u201D"}</span>
-            {" is the Schelling point\u2014the focal narrative the entire community can converge on. For the money camp: ETH is better money because it compounds. For the utility camp: the monetary premium is what your utility creates. For institutions: ETH is a bearer asset that compounds."}
+            {" resolves this. The money camp says ETH is a store of value. The utility camp says ETH derives value from usage. Both are right, both are incomplete. These aren\u2019t competing narratives\u2014they\u2019re the same flywheel. Ethereum\u2019s utility strengthens ETH\u2019s monetary properties: every transaction burns supply, generates staking yield, and increases demand for ETH as collateral. And ETH\u2019s monetary premium strengthens the network\u2019s utility: under proof of stake, a more valuable ETH means a larger security budget, which means Ethereum can secure more assets, which attracts more institutional adoption, which drives more usage. The two reinforce each other. Productive money is the Schelling point for that loop."}
           </p>
           <p>
-            {"This paper is a joint publication of "}
-            <span className="pm-accent-text">Etherealize</span>
+            {"There is an irony at the heart of the competitive landscape. Satoshi titled his whitepaper \u201CBitcoin: A Peer-to-Peer Electronic Cash System\u201D and wrote in 2010 about the need for escrow transactions, bonded contracts, and multi-party signatures. Bitcoin chose not to build any of it, positioning itself instead as digital gold\u2014a store of value that explicitly avoids use as electronic cash. Ethereum is the network that best fulfills Satoshi\u2019s original vision: programmable, peer-to-peer, and productive. This paper\u2014a joint publication of "}
+            <span className="pm-accent-text"><a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a></span>
             {" and "}
-            <span className="pm-accent-text">Bitmine</span>
-            {". Its purpose is to give the Ethereum community a shared language for explaining what they own and why\u2014and to give institutional allocators a framework for underwriting the thesis."}
+            <span className="pm-accent-text"><a href="https://www.bitminetech.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Bitmine</a></span>
+            {"\u2014makes the case that the market will eventually recognize this, and provides the framework for underwriting that thesis."}
           </p>
         </div>
       </section>
@@ -487,7 +497,7 @@ export default function ProductiveMoney() {
         <h2 className="pm-heading">Subscribe for Updates</h2>
         <div className="pm-sub-box">
           <p style={{ fontSize: "15px", color: "#8b8ca7", lineHeight: 1.65 }}>
-            New chapters, dashboard updates, and research from the Productive Money thesis.
+            The research you need to understand Ethereum and the future of finance from the Etherealize team.
           </p>
           <div className="pm-sub-row">
             <input type="email" className="pm-sub-input" placeholder="you@example.com"
@@ -509,7 +519,7 @@ export default function ProductiveMoney() {
       </div>
       <div className="pm-divider"><div className="pm-divider-line" /></div>
       <footer className="pm-footer">
-        <div className="pm-footer-left">{"\u00A9"} 2026 Etherealize x Bitmine</div>
+        <div className="pm-footer-left">{"\u00A9"} 2026 <a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a> x <a href="https://www.bitminetech.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Bitmine</a></div>
         <div className="pm-footer-links">
           <button className="pm-footer-link" onClick={() => scrollTo("thesis")}>Thesis</button>
           <button className="pm-footer-link" onClick={() => scrollTo("dashboard")}>Dashboard</button>
@@ -517,6 +527,7 @@ export default function ProductiveMoney() {
           <button className="pm-footer-link" onClick={() => scrollTo("about")}>About</button>
         </div>
       </footer>
+      <ShareFab />
     </div>
     </MarketDataProvider>
   );

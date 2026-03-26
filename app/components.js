@@ -134,11 +134,11 @@ export function EthDiamond({ size = 32 }) {
 }
 
 const COMPARISON_DATA = [
-  { attr: "Scarcity", gold: "\u25D0", btc: "\u25CF", eth: "\u25CF", note: "ETH burn can make supply deflationary" },
+  { attr: "Scarcity", gold: "\u25D0", btc: "\u25CF", eth: "\u25CF", note: "ETH issuance capped at 1.5% annually; burn can make deflationary" },
   { attr: "Fungibility", gold: "\u25CF", btc: "\u25D0", eth: "\u25D0", note: "ZK privacy pools give ETH a path forward" },
   { attr: "Divisibility", gold: "\u25D0", btc: "\u25CF", eth: "\u25CF", note: "18 decimal places" },
   { attr: "Portability", gold: "\u25CB", btc: "\u25CF", eth: "\u25CF", note: "Settles globally in seconds" },
-  { attr: "Durability", gold: "\u25CF", btc: "\u25D0", eth: "\u25CF", note: "PoS security scales with value" },
+  { attr: "Durability", gold: "\u25CF", btc: "\u25D0", eth: "\u25CF", note: "Proof-of-stake is more secure than proof-of-work" },
   { attr: "Verifiability", gold: "\u25D0", btc: "\u25CF", eth: "\u25CF", note: "Fully auditable on-chain" },
   { attr: "Censorship Resistance", gold: "\u25CB", btc: "\u25D0", eth: "\u25CF", note: "Forced inclusion guarantees" },
   { attr: "Low Carrying Cost", gold: "\u25CB", btc: "\u25D0", eth: "\u25CF", note: "Negative carrying cost via staking" },
@@ -251,7 +251,7 @@ export function CompoundingChart({ id = "" }) {
   const currentYear = progress * YEARS;
   const currentYearInt = Math.min(Math.round(currentYear), YEARS);
   const currentVal = 100 * Math.pow(1 + RATE, currentYear);
-  const currentValDisplay = currentVal.toFixed(1);
+  const currentValDisplay = Math.round(currentVal);
   const labelX = PAD.left + (currentYear / YEARS) * plotW;
   const labelY = yScale(currentVal);
   return (
@@ -327,22 +327,22 @@ export function CompoundingChart({ id = "" }) {
         )}
         <text x={W - PAD.right + 10} y={yScale(100) - 12}
           fill="#c9a84c" fontSize="11" fontFamily="'JetBrains Mono', monospace"
-          style={{ opacity: done ? 1 : 0, transition: "opacity 0.5s ease" }}>
+          style={{ opacity: animated ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
           Gold
         </text>
         <text x={W - PAD.right + 10} y={yScale(100) + 4}
           fill="#c9a84c" fontSize="10" fontFamily="'JetBrains Mono', monospace"
-          style={{ opacity: done ? 1 : 0, transition: "opacity 0.5s ease" }}>
+          style={{ opacity: animated ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
           100 oz
         </text>
         <text x={W - PAD.right + 10} y={yScale(100) + 22}
           fill="#f7931a" fontSize="11" fontFamily="'JetBrains Mono', monospace"
-          style={{ opacity: done ? 1 : 0, transition: "opacity 0.5s ease" }}>
+          style={{ opacity: animated ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
           Bitcoin
         </text>
         <text x={W - PAD.right + 10} y={yScale(100) + 36}
           fill="#f7931a" fontSize="10" fontFamily="'JetBrains Mono', monospace"
-          style={{ opacity: done ? 1 : 0, transition: "opacity 0.5s ease" }}>
+          style={{ opacity: animated ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
           100 BTC
         </text>
         <text x={W - PAD.right + 10} y={yScale(ethData[YEARS]) - 6}
@@ -371,7 +371,7 @@ export function CompoundingChart({ id = "" }) {
             <text x={xScale(hoverYear)} y={yScale(ethData[hoverYear]) - 16}
               fill="#a0b0ff" fontSize="11" fontFamily="'JetBrains Mono', monospace"
               textAnchor="middle" fontWeight="500">
-              Yr {hoverYear}: {ethData[hoverYear].toFixed(1)} ETH
+              Yr {hoverYear}: {Math.round(ethData[hoverYear])} ETH
             </text>
           </>
         )}
@@ -877,6 +877,142 @@ export function LiveDashboard() {
           <div>Loading live data{"\u2026"}</div>
         )}
       </div>
+    </div>
+  );
+}
+
+const SHARE_TEXT = "\u201CEthereum and the Era of Productive Money\u201D - Why ETH is better money than gold and Bitcoin by every measure.\n\nRead the new whitepaper from @Etherealize_io & @BitMNR explaining their $300,000 per ETH price target.";
+
+export function ShareFab() {
+  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const fabRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setVisible(window.scrollY > window.innerHeight * 0.1);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClick = (e) => {
+      if (fabRef.current && !fabRef.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [open]);
+
+  const url = typeof window !== "undefined" ? window.location.href : "";
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* fallback */ }
+  };
+
+  const shareX = () => {
+    window.open(
+      `https://x.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(url)}`,
+      "_blank", "noopener,noreferrer"
+    );
+    setOpen(false);
+  };
+
+  const shareLinkedIn = () => {
+    const linkedInUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(
+      "\u201CEthereum and the Era of Productive Money\u201D \u2014 Why ETH is better money than gold and Bitcoin by every measure.\n\nRead the new whitepaper from Etherealize and Bitmine explaining their $300,000 per ETH price target.\n\n" + url
+    )}`;
+    window.open(linkedInUrl, "_blank", "noopener,noreferrer");
+    setOpen(false);
+  };
+
+  return (
+    <div ref={fabRef} style={{
+      position: "fixed", bottom: "28px", right: "28px", zIndex: 200,
+      opacity: visible ? 1 : 0, pointerEvents: visible ? "auto" : "none",
+      transform: visible ? "translateY(0)" : "translateY(16px)",
+      transition: "opacity 0.3s ease, transform 0.3s ease",
+    }}>
+      <style>{`
+        .share-fab-btn {
+          width: 52px; height: 52px; border-radius: 50%;
+          background: rgba(130,148,252,0.15); backdrop-filter: blur(12px);
+          border: 1px solid rgba(130,148,252,0.25);
+          color: #a0b0ff; cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+          transition: all 0.2s ease;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .share-fab-btn:hover { background: rgba(130,148,252,0.25); transform: scale(1.05); }
+        .share-pop { display: flex; flex-direction: column; gap: 0; overflow: hidden; }
+        .share-opt {
+          display: flex; align-items: center; gap: 10px;
+          padding: 12px 16px; background: none; border: none;
+          color: #e4e4ef; font-family: 'Inter', sans-serif; font-size: 13px;
+          cursor: pointer; transition: background 0.15s; text-align: left; width: 100%;
+        }
+        .share-opt:hover { background: rgba(130,148,252,0.08); }
+        .share-opt svg { flex-shrink: 0; }
+        @keyframes sharePopIn {
+          from { opacity: 0; transform: translateY(8px) scale(0.95); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @media (max-width: 600px) {
+          .share-fab-btn { width: 46px; height: 46px; }
+        }
+      `}</style>
+
+      {open && (
+        <div style={{
+          position: "absolute", bottom: "62px", right: 0,
+          background: "rgba(13,14,32,0.95)", backdropFilter: "blur(16px)",
+          border: "1px solid rgba(130,148,252,0.15)", borderRadius: "10px",
+          minWidth: "210px",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+          animation: "sharePopIn 0.2s ease",
+        }}>
+          <div style={{
+            padding: "10px 16px 6px", fontSize: "10px", fontWeight: 600,
+            letterSpacing: "1.5px", textTransform: "uppercase", color: "#6b6c88",
+          }}>
+            Share this report
+          </div>
+          <div className="share-pop">
+            <button className="share-opt" onClick={copyLink}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              {copied ? <span style={{ color: "#4ade80", fontWeight: 500 }}>Copied!</span> : "Copy link"}
+            </button>
+            <button className="share-opt" onClick={shareX}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+              Share on X
+            </button>
+            <button className="share-opt" onClick={shareLinkedIn}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              Share on LinkedIn
+            </button>
+          </div>
+        </div>
+      )}
+
+      <button className="share-fab-btn" onClick={() => setOpen(!open)} aria-label="Share">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+        </svg>
+      </button>
     </div>
   );
 }
