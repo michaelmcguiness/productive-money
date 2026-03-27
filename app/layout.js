@@ -9,7 +9,7 @@ export const metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Ethereum and the Era of Productive Money — An Etherealize x Bitmine Research Paper",
+        alt: "Ethereum and the Era of Productive Money — An Etherealize Research Paper",
       },
     ],
   },

@@ -137,13 +137,13 @@ export default function PaperPage() {
 
       {/* CONTENT */}
       <article className="paper-container">
-        <div className="paper-label"><a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a> × <a href="https://www.bitminetech.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Bitmine</a> Research Paper</div>
+        <div className="paper-label"><a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a> Research Paper</div>
         <h1 className="paper-title">
           Ethereum and the Era of<br />
           <span className="paper-title-accent">Productive Money</span>
         </h1>
         <div className="paper-meta">
-          March 2026 · <a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a> × <a href="https://www.bitminetech.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Bitmine</a> · 18 min read
+          March 2026 · <a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a> · 18 min read
         </div>
 
         <div className="paper-body">
@@ -398,7 +398,7 @@ export default function PaperPage() {
       </div>
 
       <footer className="paper-footer">
-        <div className="paper-footer-left">{"\u00A9"} 2026 <a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a> × <a href="https://www.bitminetech.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Bitmine</a></div>
+        <div className="paper-footer-left">{"\u00A9"} 2026 <a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a></div>
         <button className="paper-footer-link" onClick={() => router.push("/")}>
           {"\u2190"} Back to Home
         </button>

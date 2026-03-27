@@ -927,7 +927,7 @@ export function ShareFab() {
     setOpen(false);
   };
 
-  const liText = `\u201CEthereum and the Era of Productive Money\u201D \u2014 Why ETH is better money than gold and Bitcoin by every measure.\n\nRead the new whitepaper from @Etherealize and @Bitmine Immersion Technologies (BMNR) explaining their ${priceTarget} per ETH price target.\n\n${url}`;
+  const liText = `\u201CEthereum and the Era of Productive Money\u201D \u2014 Why ETH is better money than gold and Bitcoin by every measure.\n\nRead the new whitepaper from @Etherealize explaining their ${priceTarget} per ETH price target.\n\n${url}`;
 
   const shareLinkedIn = () => {
     window.open(

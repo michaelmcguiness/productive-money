@@ -75,7 +75,7 @@ export default async function Image() {
             marginBottom: "20px",
           }}
         >
-          A Whitepaper By Etherealize × Bitmine
+          A Whitepaper By Etherealize
         </div>
 
         {/* ETH diamond (simple) */}
