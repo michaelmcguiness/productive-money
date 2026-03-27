@@ -91,7 +91,7 @@ function ThesisParagraph({ onReadMore }) {
           </li>
           <li>
             <strong style={{ color: "#e4e4ef" }}>Productive money will outcompete dead capital.</strong>
-            {" Over a long enough time horizon, productive assets always outperform non-productive ones, because productive assets compound. The only question is how long it takes the rest of the world to figure that out."}
+            {" Over a long enough time horizon, productive assets outperform unproductive ones, because productive assets compound. The only question is how long it takes the rest of the world to figure that out."}
           </li>
         </ol>
       </div>
