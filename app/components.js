@@ -569,9 +569,9 @@ export function PathToTarget({ id = "" }) {
     btcParityPrice, goldParityPrice, combinedParityPrice } = src;
   const milestones = [
     { price: ethPrice, label: "Today", labelShort: "Today", tag: fmtTag(ethPrice), mcap: fmtMcap(ethMcap), color: "#A89F93" },
-    { price: btcParityPrice, label: "Bitcoin parity", labelShort: "BTC parity", tag: fmtTag(btcParityPrice), mcap: fmtMcap(ethMcap + btcMcap), color: "#B8743A" },
-    { price: goldParityPrice, label: "Gold parity", labelShort: "Gold parity", tag: fmtTag(goldParityPrice), mcap: fmtMcap(ethMcap + goldMonetaryPremium), color: "#C2A45B" },
-    { price: combinedParityPrice, label: "Gold + Bitcoin", labelShort: "Gold + BTC", tag: fmtTag(combinedParityPrice), mcap: fmtMcap(ethMcap + goldMonetaryPremium + btcMcap), color: "#C2A45B" },
+    { price: btcParityPrice, label: "Bitcoin parity", labelShort: "BTC", tag: fmtTag(btcParityPrice), mcap: fmtMcap(ethMcap + btcMcap), color: "#B8743A" },
+    { price: goldParityPrice, label: "Gold parity", labelShort: "Gold", tag: fmtTag(goldParityPrice), mcap: fmtMcap(ethMcap + goldMonetaryPremium), color: "#C2A45B" },
+    { price: combinedParityPrice, label: "Gold + Bitcoin", labelShort: "G + B", tag: fmtTag(combinedParityPrice), mcap: fmtMcap(ethMcap + goldMonetaryPremium + btcMcap), color: "#C2A45B" },
   ];
 
   const W = 760;
