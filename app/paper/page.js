@@ -8,17 +8,17 @@ export default function PaperPage() {
 
   return (
     <MarketDataProvider>
-    <div style={{ fontFamily: "'Inter', sans-serif", background: "#050510", color: "#e4e4ef", minHeight: "100vh" }}>
+    <div style={{ fontFamily: "'DM Sans', sans-serif", background: "var(--cream)", color: "var(--ink)", minHeight: "100vh" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400&display=swap');
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        ::selection { background: rgba(130, 148, 252, 0.3); color: #fff; }
+        ::selection { background: rgba(194,164,91,0.35); color: #29251F; }
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #050510; }
-        ::-webkit-scrollbar-thumb { background: rgba(130,148,252,0.2); border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: #F5F2EC; }
+        ::-webkit-scrollbar-thumb { background: rgba(194,164,91,0.3); border-radius: 3px; }
         .paper-nav {
           position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-          background: rgba(5, 5, 16, 0.88);
+          background: rgba(245,242,236,0.92);
           backdrop-filter: blur(24px) saturate(1.2);
           border-bottom: 1px solid rgba(130, 148, 252, 0.08);
         }
@@ -26,93 +26,111 @@ export default function PaperPage() {
           max-width: 1200px; margin: 0 auto; padding: 0 32px;
           height: 64px; display: flex; align-items: center; justify-content: space-between;
         }
-        .paper-nav-brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .paper-nav-brand-text { font-size: 14px; font-weight: 600; letter-spacing: 0.5px; color: #fff; }
+        .paper-nav-brand {
+          display: flex; align-items: baseline; gap: 10px;
+          cursor: pointer; line-height: 1;
+        }
+        .paper-nav-brand-text {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 23px; font-weight: 600; color: #29251F;
+          letter-spacing: -0.2px;
+        }
         .paper-nav-brand-sub {
-          font-size: 10px; font-weight: 400; letter-spacing: 2px;
-          text-transform: uppercase; color: #6b6c88; margin-left: 2px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px; font-weight: 500; letter-spacing: 1.8px;
+          text-transform: uppercase; color: #7a7a7a;
+          position: relative; top: -1px;
         }
         .paper-back {
-          font-size: 13px; font-weight: 400; color: #9b9cb5;
+          font-size: 13px; font-weight: 400; color: #6B6257;
           background: none; border: none; cursor: pointer; transition: color 0.2s;
         }
-        .paper-back:hover { color: #a0b0ff; }
+        .paper-back:hover { color: #9E8443; }
         .paper-container {
           max-width: 720px; margin: 0 auto; padding: 140px 32px 120px;
         }
         .paper-label {
-          font-size: 12px; font-weight: 600; letter-spacing: 3px;
-          text-transform: uppercase; color: #8294fc; margin-bottom: 20px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px; font-weight: 600; letter-spacing: 3px;
+          text-transform: uppercase; color: #C2A45B; margin-bottom: 10px;
         }
+        .paper-label-rule { width: 40px; height: 1px; background: #C2A45B; margin-bottom: 28px; }
         .paper-title {
-          font-size: clamp(32px, 5vw, 52px);
-          font-weight: 700; line-height: 1.1; letter-spacing: -1px;
-          color: #fff; margin-bottom: 16px;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(40px, 6vw, 64px);
+          font-weight: 500; line-height: 1.1; letter-spacing: -0.5px;
+          color: #29251F; margin-bottom: 18px; max-width: 14ch;
         }
         .paper-title-accent {
-          background: linear-gradient(135deg, #8294fc, #b8c4ff);
-          -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-          background-clip: text;
+          font-style: italic; color: #C2A45B; font-weight: 500;
         }
         .paper-meta {
-          font-size: 14px; color: #6b6c88; margin-bottom: 48px;
-          padding-bottom: 48px; border-bottom: 1px solid rgba(130,148,252,0.08);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+          color: #8A8075; margin-bottom: 56px;
+          padding-bottom: 48px; border-bottom: 1px solid rgba(41,37,31,0.12);
         }
         .paper-body {
-          font-family: 'EB Garamond', serif;
-          font-size: 20px; line-height: 1.78; color: #c0c1d4;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 17px; line-height: 1.72; color: #3A352E;
         }
-        .paper-body p { margin-bottom: 28px; }
+        .paper-body p { margin-bottom: 22px; }
         .paper-h2 {
-          font-family: 'Inter', sans-serif;
-          font-size: clamp(24px, 3vw, 34px);
-          font-weight: 700; line-height: 1.2; letter-spacing: -0.5px;
-          color: #fff; margin: 64px 0 28px;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(32px, 4vw, 44px);
+          font-weight: 500; line-height: 1.18; letter-spacing: -0.3px;
+          color: #29251F; margin: 72px 0 28px;
         }
         .paper-blockquote {
-          border-left: 2px solid #8294fc;
-          padding: 20px 0 20px 28px; margin: 36px 0;
-          font-family: 'EB Garamond', serif;
-          font-size: 21px; font-style: italic; line-height: 1.6; color: #e4e4ef;
+          position: relative;
+          padding: 32px 0 16px 36px; margin: 44px 0;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 24px; font-style: italic; line-height: 1.5; color: #29251F;
+          font-weight: 500;
         }
-        .paper-accent { color: #a0b0ff; font-weight: 500; }
+        .paper-blockquote::before {
+          content: '\\201C'; position: absolute; left: 0; top: -8px;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 72px; line-height: 1; color: #C2A45B; font-style: normal;
+        }
+        .paper-accent { color: #9E8443; font-weight: 500; }
         .paper-ul {
           margin: 24px 0 28px 0; padding-left: 0; list-style: none;
         }
         .paper-ul li {
-          position: relative; padding-left: 20px; margin-bottom: 20px;
-          font-family: 'EB Garamond', serif; font-size: 20px; line-height: 1.78; color: #c0c1d4;
+          position: relative; padding-left: 22px; margin-bottom: 18px;
+          font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.72; color: #3A352E;
         }
         .paper-ul li::before {
           content: ''; position: absolute; left: 0; top: 12px;
-          width: 6px; height: 6px; border-radius: 50%; background: #8294fc;
+          width: 6px; height: 6px; border-radius: 50%; background: #C2A45B;
         }
         .paper-separator {
-          text-align: center; margin: 64px 0; color: #6b6c88; font-size: 20px;
+          text-align: center; margin: 64px 0; color: #8A8075; font-size: 20px;
           letter-spacing: 8px;
         }
         .paper-closing {
           text-align: center; margin-top: 80px; padding-top: 48px;
-          border-top: 1px solid rgba(130,148,252,0.08);
+          border-top: 1px solid rgba(41,37,31,0.12);
         }
         .paper-closing-text {
-          font-family: 'EB Garamond', serif; font-size: 21px; font-style: italic;
-          line-height: 1.65; color: #9b9cb5; max-width: 560px; margin: 28px auto 0;
+          font-family: 'Cormorant Garamond', serif; font-size: 21px; font-style: italic;
+          line-height: 1.65; color: #6B6257; max-width: 560px; margin: 28px auto 0;
         }
         .paper-footer {
           max-width: 720px; margin: 0 auto; padding: 56px 32px;
           display: flex; justify-content: space-between; align-items: center;
           flex-wrap: wrap; gap: 20px;
-          border-top: 1px solid rgba(130,148,252,0.08);
+          border-top: 1px solid rgba(41,37,31,0.12);
         }
-        .paper-footer-left { font-size: 12px; color: #6b6c88; }
+        .paper-footer-left { font-size: 12px; color: #8A8075; }
         .paper-footer-link {
-          font-size: 12px; color: #6b6c88; background: none;
+          font-size: 12px; color: #8A8075; background: none;
           border: none; cursor: pointer; transition: color 0.2s;
         }
-        .paper-footer-link:hover { color: #8294fc; }
+        .paper-footer-link:hover { color: #C2A45B; }
         a[target="_blank"]:hover { text-decoration: underline !important; }
-        .paper-bold { font-weight: 600; color: #e4e4ef; }
+        .paper-bold { font-weight: 600; color: #29251F; }
         @media (max-width: 600px) {
           .paper-container { padding: 100px 20px 80px; }
           .paper-footer { flex-direction: column; text-align: center; }
@@ -123,11 +141,8 @@ export default function PaperPage() {
       <nav className="paper-nav">
         <div className="paper-nav-inner">
           <div className="paper-nav-brand" onClick={() => router.push("/")}>
-            <EthDiamond size={14} />
-            <div>
-              <span className="paper-nav-brand-text">Productive Money</span>
-              <span className="paper-nav-brand-sub"> — <a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a></span>
-            </div>
+            <span className="paper-nav-brand-text">Productive Money</span>
+            <span className="paper-nav-brand-sub">{" \u2014 "}<a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a></span>
           </div>
           <button className="paper-back" onClick={() => router.push("/")}>
             {"\u2190"} Back to Home
@@ -137,9 +152,10 @@ export default function PaperPage() {
 
       {/* CONTENT */}
       <article className="paper-container">
-        <div className="paper-label"><a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a> Research Paper</div>
+        <div className="paper-label"><a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize Research</a></div>
+        <div className="paper-label-rule" />
         <h1 className="paper-title">
-          Ethereum and the Era of<br />
+          Ethereum and the Era of{" "}
           <span className="paper-title-accent">Productive Money</span>
         </h1>
         <div className="paper-meta">
@@ -242,7 +258,7 @@ export default function PaperPage() {
             Buffett loves businesses that sit at a chokepoint of economic activity and collect a fee on everything that passes through. {"\u201C"}In an inflationary world,{"\u201D"} he has said, {"\u201C"}a toll bridge would be a great thing to own because you{"'"}ve laid out the capital costs. You built it in old dollars and you don{"'"}t have to keep replacing it.{"\u201D"} BlackRock—the world{"'"}s largest asset manager, with $14 trillion under management—has adopted the same metaphor for Ethereum, calling it {"\u201C"}the toll road to tokenization{"\u201D"} in a presentation at Davos.
           </p>
           <p>
-            Ethereum is the largest toll road in decentralized finance. More than 65% of all tokenized real-world assets<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>1</sup>—money market funds, equities, credit—are issued on Ethereum, because institutions choose the most secure settlement layer for assets that matter. In 2025, Ethereum settled over $18.8 trillion in stablecoin transactions alone<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>2</sup>, which is more than Visa processes annually. Every transaction pays a fee. A portion is burned, and the rest goes to stakers. The more assets issued, the more traffic, the more ETH earns, and the scarcer it becomes.
+            Ethereum is the largest toll road in decentralized finance. More than 65% of all tokenized real-world assets<sup style={{ fontSize: "11px", color: "#C2A45B", cursor: "default" }}>1</sup>—money market funds, equities, credit—are issued on Ethereum, because institutions choose the most secure settlement layer for assets that matter. In 2025, Ethereum settled over $18.8 trillion in stablecoin transactions alone<sup style={{ fontSize: "11px", color: "#C2A45B", cursor: "default" }}>2</sup>, which is more than Visa processes annually. Every transaction pays a fee. A portion is burned, and the rest goes to stakers. The more assets issued, the more traffic, the more ETH earns, and the scarcer it becomes.
           </p>
           <p>
             But ETH is not just the toll road—it is also the collateral that the financial system on the other side of the bridge runs on. Across lending protocols, derivatives markets, and liquidity pools, ETH is the dominant asset that borrowers post, that liquidity providers deposit, that the system demands as its margin of safety. It is the most widely used collateral on Aave, the primary asset backing decentralized stablecoins like DAI, and the base pair for the majority of decentralized exchange liquidity. The bigger the system grows, the more ETH gets locked up.
@@ -251,7 +267,7 @@ export default function PaperPage() {
             Gold can serve as collateral, but the process is slow, expensive, and dependent on trusted intermediaries. You cannot programmatically liquidate a gold position in twelve seconds. You cannot compose gold into layered financial instruments that settle atomically. You cannot use gold as collateral simultaneously in three different lending markets without physically moving it. ETH does all of this natively. It is programmable collateral. And because every operation consumes gas, the collateral function and the value accrual function are the same loop.
           </p>
           <p>
-            In total, ETH has three independent sources of structural demand that remove it from free circulation. <span className="paper-accent">Staking demand:</span> ~29% of all ETH is locked to secure the network<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>3</sup>. <span className="paper-accent">Collateral demand:</span> the decentralized financial system uses ETH as foundational collateral given that it{"'"}s the only asset native to the network without counterparty risk. <span className="paper-accent">Gas demand:</span> every transaction requires ETH, and a portion is permanently burned.
+            In total, ETH has three independent sources of structural demand that remove it from free circulation. <span className="paper-accent">Staking demand:</span> ~29% of all ETH is locked to secure the network<sup style={{ fontSize: "11px", color: "#C2A45B", cursor: "default" }}>3</sup>. <span className="paper-accent">Collateral demand:</span> the decentralized financial system uses ETH as foundational collateral given that it{"'"}s the only asset native to the network without counterparty risk. <span className="paper-accent">Gas demand:</span> every transaction requires ETH, and a portion is permanently burned.
           </p>
           <p>
             Other monetary assets have demand drivers that lock up supply—gold sits in central bank vaults and temple jewelry. But ETH{"'"}s demand drivers are different in three ways. First, they are native to its monetary function: you need ETH because it is the money of the system. Second, they scale proportionally with the financial system built on Ethereum. Third, one of them permanently destroys supply. Gold jewelry can be melted down. Central bank reserves can be sold. But burned ETH is gone forever.
@@ -299,7 +315,7 @@ export default function PaperPage() {
             The demonetization of silver began in the 1870s, driven by a convergence of forces. Massive silver deposits discovered in the American West were flooding the market with new supply, undermining silver{"'"}s scarcity. Germany abandoned silver for a gold standard after its unification in 1871, dumping its reserves onto global markets. The United States followed with the Coinage Act of 1873. Advances in banking and telecommunications then eliminated silver{"'"}s last remaining advantage: paper banknotes and telegraphic transfers backed by gold made it practical for everyday settlement, removing the need to physically divide it for small transactions. One by one, the major economies coordinated on gold, and silver{"'"}s monetary premium collapsed. The gold-to-silver ratio went from 1:15 to 1:80.
           </p>
           <p>
-            The consequences for nations that held the wrong money were catastrophic. China had used silver as its monetary standard for centuries and did not follow the West{"'"}s transition to gold. As silver{"'"}s monetary premium evaporated over the following decades, China{"'"}s currency lost over 80% of its international purchasing power. The country could no longer service its foreign debts, which were denominated in gold. In 1935, China was forced to abandon silver entirely and introduce a fiat currency, just as it was entering two devastating wars. The government printed money to fund the military, hyperinflation followed<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>4</sup>, and it became clear to the world that you cannot insulate yourself from the consequences of others holding better money than yours.
+            The consequences for nations that held the wrong money were catastrophic. China had used silver as its monetary standard for centuries and did not follow the West{"'"}s transition to gold. As silver{"'"}s monetary premium evaporated over the following decades, China{"'"}s currency lost over 80% of its international purchasing power. The country could no longer service its foreign debts, which were denominated in gold. In 1935, China was forced to abandon silver entirely and introduce a fiat currency, just as it was entering two devastating wars. The government printed money to fund the military, hyperinflation followed<sup style={{ fontSize: "11px", color: "#C2A45B", cursor: "default" }}>4</sup>, and it became clear to the world that you cannot insulate yourself from the consequences of others holding better money than yours.
           </p>
           <p>
             Monetary standards are Nash equilibria. The cost of remaining on an inferior standard rises as adoption of the superior standard grows. Silver holders in the 1870s couldn{"'"}t simply decide to keep using silver. Once enough of the world moved to gold, silver{"'"}s monetary premium vanished whether you believed in silver or not.
@@ -320,17 +336,17 @@ export default function PaperPage() {
             This is not a theoretical concern. What matters for a monetary network is not absolute security but relative security: security as a proportion of the value being secured. It{"'"}s similar to why countries of all sizes maintain roughly similar military budgets as a percentage of GDP. A $20 trillion Bitcoin network would attract nation-state-level adversaries, yet its proof-of-work security budget when the block reward reaches zero will be a fraction of what it is today. The cost of attack divided by market cap is the correct measure, and on that measure, Bitcoin{"'"}s security deteriorates with every halving.
           </p>
           <p>
-            The vulnerability is even more stark when measured by hardware cost. The cost to attack Bitcoin is not the annual security budget but the cost to acquire sufficient mining hardware to control 51% of the network{"'"}s hashrate. At current hashrates and ASIC prices, the total replacement cost of all Bitcoin mining hardware is estimated at roughly $6 billion<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>5</sup>. For context, several individual technology companies now spend more than that in a single quarter on computing infrastructure alone. As Bitcoin{"'"}s block reward continues to halve, the cost of attack may stagnate—even as the value it is supposed to protect grows.
+            The vulnerability is even more stark when measured by hardware cost. The cost to attack Bitcoin is not the annual security budget but the cost to acquire sufficient mining hardware to control 51% of the network{"'"}s hashrate. At current hashrates and ASIC prices, the total replacement cost of all Bitcoin mining hardware is estimated at roughly $6 billion<sup style={{ fontSize: "11px", color: "#C2A45B", cursor: "default" }}>5</sup>. For context, several individual technology companies now spend more than that in a single quarter on computing infrastructure alone. As Bitcoin{"'"}s block reward continues to halve, the cost of attack may stagnate—even as the value it is supposed to protect grows.
           </p>
           <p>
-            <span className="paper-accent">Ethereum{"'"}s security model works differently.</span> Attacking Ethereum would require acquiring roughly a third of all staked ETH—currently over $24 billion<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>6</sup>—and the attacker{"'"}s stake would be slashed, meaning the capital is destroyed in the attempt. This cost scales directly with the network{"'"}s value: if ETH{"'"}s market cap doubles, the cost to attack it doubles. Bitcoin has no equivalent mechanism. If Bitcoin{"'"}s market cap doubles, the cost to attack it stays the same until miners independently invest in more hardware—which they will only do if the economics justify it, and the halving schedule is making the economics worse every four years. Where Bitcoin burns energy, Ethereum deploys capital productively. One model inefficiently destroys resources, while the other compounds them. For a monetary asset competing for a monetary premium worth $36 trillion, the durability of the security model is the foundation on which the entire value proposition rests.
+            <span className="paper-accent">Ethereum{"'"}s security model works differently.</span> Attacking Ethereum would require acquiring roughly a third of all staked ETH—currently over $24 billion<sup style={{ fontSize: "11px", color: "#C2A45B", cursor: "default" }}>6</sup>—and the attacker{"'"}s stake would be slashed, meaning the capital is destroyed in the attempt. This cost scales directly with the network{"'"}s value: if ETH{"'"}s market cap doubles, the cost to attack it doubles. Bitcoin has no equivalent mechanism. If Bitcoin{"'"}s market cap doubles, the cost to attack it stays the same until miners independently invest in more hardware—which they will only do if the economics justify it, and the halving schedule is making the economics worse every four years. Where Bitcoin burns energy, Ethereum deploys capital productively. One model inefficiently destroys resources, while the other compounds them. For a monetary asset competing for a monetary premium worth $36 trillion, the durability of the security model is the foundation on which the entire value proposition rests.
           </p>
           <p>
             If Bitcoin{"'"}s fee revenue does not grow by several orders of magnitude, there are two candidate solutions: add tail issuance, which breaks the 21 million cap, or switch to proof of stake. Both are cultural non-starters for the Bitcoin community. As Vitalik Buterin observed in his reflections on the block size war:
           </p>
 
           <div className="paper-blockquote">
-            {"\u201C"}The ultimate diffuser of political tension is not compromise, but rather new technology: the discovery of fundamentally new approaches that give both sides more of what they want at the same time. When an ecosystem stops embracing new technology, it inevitably stagnates, and becomes more contentious at the same time.<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>7</sup>{"\u201D"}
+            {"\u201C"}The ultimate diffuser of political tension is not compromise, but rather new technology: the discovery of fundamentally new approaches that give both sides more of what they want at the same time. When an ecosystem stops embracing new technology, it inevitably stagnates, and becomes more contentious at the same time.<sup style={{ fontSize: "11px", color: "#C2A45B", cursor: "default" }}>7</sup>{"\u201D"}
           </div>
 
           <p>
@@ -353,7 +369,7 @@ export default function PaperPage() {
           </p>
 
           <p>
-            The addressable market is also growing. The United States carries over $38 trillion in national debt, with interest payments approaching $1 trillion annually. The debt-to-GDP ratio has risen from 56% in 2000 to roughly 125% today<sup style={{ fontSize: "11px", color: "#8294fc", cursor: "default" }}>8</sup>. Every fiat currency in history has followed the same arc: initial stability, then moderate inflation, then ruinous debasement. The dollar is 55 years into that arc. As the fiat system deteriorates, the total addressable market for non-sovereign money expands with every trillion in new debt.
+            The addressable market is also growing. The United States carries over $38 trillion in national debt, with interest payments approaching $1 trillion annually. The debt-to-GDP ratio has risen from 56% in 2000 to roughly 125% today<sup style={{ fontSize: "11px", color: "#C2A45B", cursor: "default" }}>8</sup>. Every fiat currency in history has followed the same arc: initial stability, then moderate inflation, then ruinous debasement. The dollar is 55 years into that arc. As the fiat system deteriorates, the total addressable market for non-sovereign money expands with every trillion in new debt.
           </p>
           <p>
             $36 trillion may be conservative. A significant portion of the value embedded in global real estate, government bonds, and equities is not productive value but monetary premium in disguise. A Manhattan apartment trading at a 2% cap rate is not being priced as a rental business; it is being priced as a store of value with a small yield attached. The {"\u201C"}convenience yield{"\u201D"} on U.S. Treasuries exists because trillions in demand comes from institutions that need safe collateral, not yield. If a superior monetary asset emerged—scarce, productive, self-custodied, without counterparty risk—some fraction of that embedded premium, measured in the tens of trillions, would migrate. Enough to make $36 trillion look like a floor.
@@ -364,7 +380,7 @@ export default function PaperPage() {
 
           <div className="paper-separator">{"\u2736  \u2736  \u2736"}</div>
 
-          <p style={{ fontStyle: "italic", textAlign: "center", color: "#9b9cb5" }}>
+          <p style={{ fontStyle: "italic", textAlign: "center", color: "#6B6257" }}>
             If you own one ounce of gold for an eternity, you will still own one ounce at its end. If you own one bitcoin for an eternity, you will still own one bitcoin at its end. If you stake one ETH for an eternity, you will own considerably more ETH at its end.
           </p>
 
@@ -376,11 +392,11 @@ export default function PaperPage() {
           </div>
         </div>
 
-          <div style={{ marginTop: "64px", paddingTop: "32px", borderTop: "1px solid rgba(130,148,252,0.08)" }}>
-            <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#8294fc", marginBottom: "20px", fontFamily: "'Inter', sans-serif" }}>
+          <div style={{ marginTop: "64px", paddingTop: "32px", borderTop: "1px solid rgba(41,37,31,0.12)" }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#C2A45B", marginBottom: "20px", fontFamily: "'DM Sans', sans-serif" }}>
               Sources
             </div>
-            <ol style={{ margin: 0, padding: "0 0 0 20px", fontFamily: "'Inter', sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#6b6c88" }}>
+            <ol style={{ margin: 0, padding: "0 0 0 20px", fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#8A8075" }}>
               <li>RWA.xyz analytics dashboard. Nasdaq/Motley Fool (Jan 8, 2026): {"\u201C"}rwa.xyz shows Ethereum has about 65% of the total value in distributed RWA on chain.{"\u201D"} KuCoin Research independently confirms.</li>
               <li>Stablecoin settlement volume data from DefiLlama and Artemis Analytics. Note: this figure represents total on-chain transfer volume, not unique economic transactions.</li>
               <li>Dune Analytics (hildobby dashboard); Compass Staking Yield Reference Index, as of early 2026. Approximately 35.8M ETH staked, representing ~29% of circulating supply.</li>
@@ -391,18 +407,27 @@ export default function PaperPage() {
               <li>U.S. Treasury, TreasuryDirect.gov (debt {">"}$38T); Congressional Budget Office (interest approaching $1T); Federal Reserve Economic Data/FRED (debt-to-GDP ~125%, vs. 56% in 2000).</li>
             </ol>
           </div>
+
+          <section style={{ marginTop: "72px", paddingTop: "48px", borderTop: "1px solid rgba(41,37,31,0.12)" }}>
+            <h2 className="paper-h2" style={{ marginTop: 0 }}>About Etherealize</h2>
+            <div className="paper-body">
+              <p>
+                Etherealize is an institutional advisory firm focused on Ethereum. The firm works with allocators, asset managers, and financial institutions to translate the Ethereum ecosystem into terms that fit institutional mandates {"\u2014"} research, education, and direct advisory on tokenization, staking, and on-chain capital markets infrastructure.
+              </p>
+              <p>
+                Etherealize was co-founded by Vivek Raman and Danny Ryan. Vivek leads the firm{"'"}s institutional and capital markets work. Danny Ryan was a core researcher at the Ethereum Foundation, where he led the coordination of Ethereum{"'"}s transition to proof of stake.
+              </p>
+              <p>
+                This paper was produced in collaboration with Bitmine, with Tom Lee of Fundstrat serving as an advisor.
+              </p>
+            </div>
+          </section>
       </article>
 
       <div style={{ maxWidth: "720px", margin: "0 auto", padding: "80px 32px 0" }}>
         <SubscribeBox />
       </div>
 
-      <footer className="paper-footer">
-        <div className="paper-footer-left">{"\u00A9"} 2026 <a href="https://www.etherealize.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>Etherealize</a></div>
-        <button className="paper-footer-link" onClick={() => router.push("/")}>
-          {"\u2190"} Back to Home
-        </button>
-      </footer>
     </div>
     </MarketDataProvider>
   );

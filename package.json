@@ -1,1 +1,1 @@
-{"name":"productive-money","version":"0.1.0","private":true,"scripts":{"dev":"next dev","build":"next build","start":"next start"},"dependencies":{"next":"latest","react":"^19","react-dom":"^19"}}
+{"name":"productive-money","version":"0.1.0","private":true,"scripts":{"dev":"next dev","build":"next build","start":"next start"},"dependencies":{"@vercel/analytics":"^2.0.1","next":"latest","react":"^19","react-dom":"^19"}}

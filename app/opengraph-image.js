@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "Ethereum and the Era of Productive Money — The Path to $300,000 ETH";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -47,55 +46,59 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#050510",
+          background: "#F5F2EC",
           position: "relative",
         }}
       >
         {/* Subtle radial glow */}
         <div
           style={{
+            display: "flex",
             position: "absolute",
             top: "-100px",
             left: "50%",
             transform: "translateX(-50%)",
             width: "800px",
             height: "600px",
-            background: "radial-gradient(ellipse, rgba(130,148,252,0.08), transparent 70%)",
+            background: "radial-gradient(ellipse, rgba(194,164,91,0.1), transparent 70%)",
           }}
         />
 
         {/* Overline */}
         <div
           style={{
+            display: "flex",
             fontSize: "14px",
             fontWeight: 600,
             letterSpacing: "4px",
             textTransform: "uppercase",
-            color: "#8294fc",
+            color: "#C2A45B",
             marginBottom: "20px",
           }}
         >
-          A Whitepaper By Etherealize
+          A Report By Etherealize
         </div>
 
         {/* ETH diamond (simple) */}
         <div
           style={{
+            display: "flex",
             width: "0",
             height: "0",
             borderLeft: "18px solid transparent",
             borderRight: "18px solid transparent",
-            borderBottom: "30px solid rgba(130,148,252,0.7)",
+            borderBottom: "30px solid #29251F",
             marginBottom: "6px",
           }}
         />
         <div
           style={{
+            display: "flex",
             width: "0",
             height: "0",
             borderLeft: "18px solid transparent",
             borderRight: "18px solid transparent",
-            borderTop: "18px solid rgba(130,148,252,0.5)",
+            borderTop: "18px solid rgba(41,37,31,0.6)",
             marginBottom: "28px",
           }}
         />
@@ -103,9 +106,10 @@ export default async function Image() {
         {/* Title */}
         <div
           style={{
+            display: "flex",
             fontSize: "42px",
             fontWeight: 700,
-            color: "#ffffff",
+            color: "#29251F",
             letterSpacing: "-1px",
             marginBottom: "8px",
           }}
@@ -114,9 +118,10 @@ export default async function Image() {
         </div>
         <div
           style={{
+            display: "flex",
             fontSize: "52px",
             fontWeight: 700,
-            color: "#8294fc",
+            color: "#C2A45B",
             letterSpacing: "-1px",
             marginBottom: "32px",
           }}
@@ -135,34 +140,38 @@ export default async function Image() {
         >
           <div
             style={{
+            display: "flex",
               fontSize: "20px",
-              color: "#6b6c88",
+              color: "#8A8075",
             }}
           >
             The path from
           </div>
           <div
             style={{
+            display: "flex",
               fontSize: "28px",
               fontWeight: 700,
-              color: "#e4e4ef",
+              color: "#29251F",
             }}
           >
             {fmtPrice(ethPrice)}
           </div>
           <div
             style={{
+            display: "flex",
               fontSize: "20px",
-              color: "#6b6c88",
+              color: "#8A8075",
             }}
           >
             to
           </div>
           <div
             style={{
+            display: "flex",
               fontSize: "28px",
               fontWeight: 700,
-              color: "#8294fc",
+              color: "#C2A45B",
             }}
           >
             {fmtPrice(impliedPrice)} ETH
@@ -172,8 +181,9 @@ export default async function Image() {
         {/* Subtitle */}
         <div
           style={{
+            display: "flex",
             fontSize: "18px",
-            color: "#5a5b78",
+            color: "#8A8075",
             marginTop: "8px",
           }}
         >
@@ -183,12 +193,13 @@ export default async function Image() {
         {/* Bottom bar */}
         <div
           style={{
+            display: "flex",
             position: "absolute",
             bottom: "0",
             left: "0",
             right: "0",
             height: "4px",
-            background: "linear-gradient(90deg, #8294fc, #b8c4ff, #8294fc)",
+            background: "linear-gradient(90deg, #C2A45B, #D4B775, #C2A45B)",
           }}
         />
       </div>
