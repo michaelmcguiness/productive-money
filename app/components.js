@@ -353,7 +353,10 @@ export function CompoundingChart({ id = "" }) {
   const xScale = (year) => PAD.left + (year / YEARS) * plotW;
   const yScale = (val) => PAD.top + plotH - ((val / yMax) * plotH);
   const ethPath = ethData.map((v, i) => `${i === 0 ? 'M' : 'L'}${xScale(i).toFixed(1)},${yScale(v).toFixed(1)}`).join(' ');
-  const flatPath = `M${xScale(0).toFixed(1)},${yScale(100).toFixed(1)} L${xScale(YEARS).toFixed(1)},${yScale(100).toFixed(1)}`;
+  const goldY = yScale(100) - 2;
+  const btcY = yScale(100) + 2;
+  const goldFlatPath = `M${xScale(0).toFixed(1)},${goldY.toFixed(1)} L${xScale(YEARS).toFixed(1)},${goldY.toFixed(1)}`;
+  const btcFlatPath = `M${xScale(0).toFixed(1)},${btcY.toFixed(1)} L${xScale(YEARS).toFixed(1)},${btcY.toFixed(1)}`;
   const ethArea = ethPath + ` L${xScale(YEARS).toFixed(1)},${yScale(0).toFixed(1)} L${xScale(0).toFixed(1)},${yScale(0).toFixed(1)} Z`;
   const yTicks = [];
   for (let v = 0; v <= yMax; v += 50) yTicks.push(v);
@@ -390,8 +393,8 @@ export function CompoundingChart({ id = "" }) {
       >
         <defs>
           <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="rgba(194,164,91,0.22)" />
-            <stop offset="100%" stopColor="rgba(194,164,91,0)" />
+            <stop offset="0%" stopColor="rgba(142,164,194,0.22)" />
+            <stop offset="100%" stopColor="rgba(142,164,194,0)" />
           </linearGradient>
           <filter id={glowId}>
             <feGaussianBlur stdDeviation="3" result="blur" />
@@ -418,19 +421,19 @@ export function CompoundingChart({ id = "" }) {
         ))}
         <g clipPath={`url(#${clipId})`}>
           <path d={ethArea} fill={`url(#${gradId})`} />
-          <path d={flatPath} fill="none" stroke="#C2A45B" strokeWidth="2" strokeDasharray="6,4" />
-          <path d={flatPath} fill="none" stroke="#B8743A" strokeWidth="2" strokeDasharray="6,4" />
-          <path d={ethPath} fill="none" stroke="#C2A45B" strokeWidth="2.5" filter={`url(#${glowId})`} />
+          <path d={goldFlatPath} fill="none" stroke="#C2A45B" strokeWidth="2" strokeDasharray="6,4" />
+          <path d={btcFlatPath} fill="none" stroke="#B8743A" strokeWidth="2" strokeDasharray="6,4" />
+          <path d={ethPath} fill="none" stroke="#8EA4C2" strokeWidth="2.5" filter={`url(#${glowId})`} />
         </g>
         {animated && !done && (
           <g>
             <circle cx={labelX} cy={labelY} r="4"
-              fill="#C2A45B" filter={`url(#${glowId})`} />
+              fill="#8EA4C2" filter={`url(#${glowId})`} />
             <rect x={labelX - 52} y={labelY - 32}
               width="104" height="24" rx="4" fill="rgba(41,37,31,0.95)"
-              stroke="rgba(194,164,91,0.35)" strokeWidth="1" />
+              stroke="rgba(142,164,194,0.35)" strokeWidth="1" />
             <text x={labelX} y={labelY - 16}
-              fill="#D4B775" fontSize="11" fontFamily="'JetBrains Mono', monospace"
+              fill="#B0C8E3" fontSize="11" fontFamily="'JetBrains Mono', monospace"
               textAnchor="middle" fontWeight="500">
               Yr {currentYearInt}: {currentValDisplay} ETH
             </text>
@@ -438,7 +441,7 @@ export function CompoundingChart({ id = "" }) {
         )}
         {done && (
           <circle cx={xScale(YEARS)} cy={yScale(ethData[YEARS])} r="4"
-            fill="#C2A45B" filter={`url(#${glowId})`} />
+            fill="#8EA4C2" filter={`url(#${glowId})`} />
         )}
         <text x={W - PAD.right + 10} y={yScale(100) - 12}
           fill="#C2A45B" fontSize="11" fontFamily="'JetBrains Mono', monospace"
@@ -461,13 +464,13 @@ export function CompoundingChart({ id = "" }) {
           100 BTC
         </text>
         <text x={W - PAD.right + 10} y={yScale(ethData[YEARS]) - 6}
-          fill="#C2A45B" fontSize="11" fontFamily="'JetBrains Mono', monospace"
+          fill="#8EA4C2" fontSize="11" fontFamily="'JetBrains Mono', monospace"
           fontWeight="600"
           style={{ opacity: done ? 1 : 0, transition: "opacity 0.5s ease" }}>
           ETH
         </text>
         <text x={W - PAD.right + 10} y={yScale(ethData[YEARS]) + 8}
-          fill="#C2A45B" fontSize="10" fontFamily="'JetBrains Mono', monospace"
+          fill="#8EA4C2" fontSize="10" fontFamily="'JetBrains Mono', monospace"
           style={{ opacity: done ? 1 : 0, transition: "opacity 0.5s ease" }}>
           {ethData[YEARS].toFixed(0)} ETH
         </text>
@@ -477,14 +480,14 @@ export function CompoundingChart({ id = "" }) {
               y1={PAD.top} y2={H - PAD.bottom}
               stroke="rgba(194,164,91,0.3)" strokeWidth="1" strokeDasharray="4,3" />
             <circle cx={xScale(hoverYear)} cy={yScale(ethData[hoverYear])}
-              r="4" fill="#C2A45B" stroke="#29251F" strokeWidth="2" />
-            <circle cx={xScale(hoverYear)} cy={yScale(100)}
+              r="4" fill="#8EA4C2" stroke="#29251F" strokeWidth="2" />
+            <circle cx={xScale(hoverYear)} cy={goldY}
               r="3" fill="#C2A45B" stroke="#29251F" strokeWidth="2" />
             <rect x={xScale(hoverYear) - 52} y={yScale(ethData[hoverYear]) - 32}
               width="104" height="24" rx="4" fill="rgba(41,37,31,0.94)"
-              stroke="rgba(194,164,91,0.3)" strokeWidth="1" />
+              stroke="rgba(142,164,194,0.35)" strokeWidth="1" />
             <text x={xScale(hoverYear)} y={yScale(ethData[hoverYear]) - 16}
-              fill="#D4B775" fontSize="11" fontFamily="'JetBrains Mono', monospace"
+              fill="#B0C8E3" fontSize="11" fontFamily="'JetBrains Mono', monospace"
               textAnchor="middle" fontWeight="500">
               Yr {hoverYear}: {Math.round(ethData[hoverYear])} ETH
             </text>
@@ -505,7 +508,7 @@ export function CompoundingChart({ id = "" }) {
           <span style={{ fontSize: "12px", color: "#8A8075" }}>Bitcoin (0% yield)</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <div style={{ width: "16px", height: "2px", background: "#C2A45B" }} />
+          <div style={{ width: "16px", height: "2px", background: "#8EA4C2" }} />
           <span style={{ fontSize: "12px", color: "#8A8075" }}>ETH staked (3.2% compound)</span>
         </div>
       </div>
@@ -538,6 +541,7 @@ export function PathToTarget({ id = "" }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -546,6 +550,15 @@ export function PathToTarget({ id = "" }) {
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
 
   const src = ctx?.data || ctx?.fallbacks || computeDerived(FALLBACKS);
@@ -562,8 +575,19 @@ export function PathToTarget({ id = "" }) {
   ];
 
   const W = 760;
-  const H = 420;
-  const PAD = { top: 60, right: 80, bottom: 30, left: 90 };
+  const H = isMobile ? 520 : 420;
+  const PAD = isMobile
+    ? { top: 80, right: 40, bottom: 36, left: 70 }
+    : { top: 60, right: 80, bottom: 30, left: 90 };
+  const FS_AXIS = isMobile ? 20 : 11;
+  const FS_LABEL = isMobile ? 24 : 14;
+  const FS_ELABEL = isMobile ? 18 : 12;
+  const RECT_W = isMobile ? 200 : 92;
+  const RECT_W_LAST = isMobile ? 220 : 112;
+  const RECT_H = isMobile ? 44 : 24;
+  const RECT_H_LAST = isMobile ? 50 : 28;
+  const DOT_R = isMobile ? 8 : 5;
+  const DOT_R_LAST = isMobile ? 11 : 7;
   const plotW = W - PAD.left - PAD.right;
   const plotH = H - PAD.top - PAD.bottom;
   const logMin = Math.log10(Math.max(ethPrice * 0.7, 500));
@@ -618,7 +642,6 @@ export function PathToTarget({ id = "" }) {
         </div>
       ) : (
       <>
-      <div className="ptt-svg-view">
       <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", height: "auto", display: "block" }}
         onMouseLeave={() => setHoveredIdx(null)}>
         <defs>
@@ -646,8 +669,8 @@ export function PathToTarget({ id = "" }) {
             <line x1={PAD.left} x2={W - PAD.right}
               y1={yScale(p)} y2={yScale(p)}
               stroke="rgba(237,230,214,0.13)" strokeWidth="1" />
-            <text x={PAD.left - 14} y={yScale(p) + 4}
-              fill="#A89F93" fontSize="10" fontFamily="'JetBrains Mono', monospace"
+            <text x={PAD.left - 14} y={yScale(p) + FS_AXIS / 3}
+              fill="#A89F93" fontSize={FS_AXIS} fontFamily="'JetBrains Mono', monospace"
               textAnchor="end">
               {p >= 1000 ? `$${(p/1000).toFixed(0)}K` : `$${p}`}
             </text>
@@ -669,8 +692,15 @@ export function PathToTarget({ id = "" }) {
           const isHovered = hoveredIdx === i;
           const delay = 0.5 + i * 0.5;
           const labelAbove = i % 2 === 0;
-          const xOffset = i === 0 ? 40 : 0;
+          const xOffset = i === 0 ? (isMobile ? 80 : 40) : 0;
           const cx = x + xOffset;
+          const rectW = isLast ? RECT_W_LAST : RECT_W;
+          const rectH = isLast ? RECT_H_LAST : RECT_H;
+          const rectTopOffset = isMobile ? 68 : 44;
+          const rectBotOffset = isMobile ? 26 : 14;
+          const eyebrowTopOffset = isMobile ? 86 : 52;
+          const eyebrowBotOffset = isMobile ? 84 : 48;
+          const dotR = isLast ? DOT_R_LAST : DOT_R;
           return (
             <g key={i}
               onMouseEnter={() => setHoveredIdx(i)}
@@ -682,7 +712,7 @@ export function PathToTarget({ id = "" }) {
                   opacity: visible ? 0.25 : 0,
                   transition: `opacity 0.4s ease ${delay}s`,
                 }} />
-              <circle cx={x} cy={y} r={isLast ? 7 : 5}
+              <circle cx={x} cy={y} r={dotR}
                 fill={m.color}
                 filter={isLast ? `url(#${dotGlowId})` : undefined}
                 style={{
@@ -692,7 +722,7 @@ export function PathToTarget({ id = "" }) {
                   transformOrigin: `${x}px ${y}px`,
                   transitionProperty: "opacity, transform",
                 }} />
-              <circle cx={x} cy={y} r={isLast ? 7 : 5}
+              <circle cx={x} cy={y} r={dotR}
                 fill="none" stroke={m.color} strokeWidth="1.5" opacity="0.3"
                 style={{
                   opacity: visible ? 0.3 : 0,
@@ -706,21 +736,22 @@ export function PathToTarget({ id = "" }) {
                 transition: `opacity 0.4s ease ${delay + 0.2}s`,
               }}>
                 <rect
-                  x={cx - (isLast ? 56 : 46)} y={labelAbove ? y - 44 : y + 14}
-                  width={isLast ? 112 : 92} height={isLast ? 28 : 24}
+                  x={cx - rectW / 2}
+                  y={labelAbove ? y - rectTopOffset : y + rectBotOffset}
+                  width={rectW} height={rectH}
                   rx="4" fill="rgba(41,37,31,0.94)"
                   stroke={isHovered ? m.color : "rgba(194,164,91,0.22)"}
                   strokeWidth="1"
                 />
-                <text x={cx} y={labelAbove ? y - 27 : y + 31}
+                <text x={cx} y={labelAbove ? y - rectTopOffset + rectH * 0.64 : y + rectBotOffset + rectH * 0.64}
                   fill={isLast ? "#D4B775" : "#EDE6D6"}
-                  fontSize={isLast ? "14" : "12"} fontWeight={isLast ? "600" : "500"}
+                  fontSize={isLast ? FS_LABEL : FS_LABEL - 2} fontWeight={isLast ? "600" : "500"}
                   fontFamily="'JetBrains Mono', monospace"
                   textAnchor="middle">
                   {m.tag}
                 </text>
-                <text x={cx} y={labelAbove ? y - 52 : y + 48}
-                  fill={m.color} fontSize="9" fontWeight="500"
+                <text x={cx} y={labelAbove ? y - eyebrowTopOffset : y + eyebrowBotOffset + rectH}
+                  fill={m.color} fontSize={FS_ELABEL} fontWeight="500"
                   fontFamily="'DM Sans', sans-serif"
                   textAnchor="middle" letterSpacing="1"
                   style={{ textTransform: "uppercase" }}>
@@ -756,22 +787,7 @@ export function PathToTarget({ id = "" }) {
           );
         })}
       </div>
-      </div>
-      <div className="ptt-list-view">
-        {milestones.map((m, i) => {
-          const isLast = i === milestones.length - 1;
-          return (
-            <div key={i} className={`ptt-row${isLast ? " ptt-row-target" : ""}`}>
-              <div className="ptt-row-label">{m.label}</div>
-              <div className="ptt-row-price" style={{ color: isLast ? "#D4B775" : "#EDE6D6" }}>{m.tag}</div>
-              <div className="ptt-row-mcap">MCap {m.mcap}</div>
-            </div>
-          );
-        })}
-      </div>
       <style>{`
-        .ptt-svg-view { display: block; }
-        .ptt-list-view { display: none; }
         .ptt-xaxis {
           position: relative;
           height: 22px;
@@ -790,47 +806,10 @@ export function PathToTarget({ id = "" }) {
         }
         .ptt-xlabel-short { display: none; }
         @media (max-width: 640px) {
-          .ptt-svg-view { display: none; }
-          .ptt-list-view {
-            display: flex; flex-direction: column;
-            gap: 1px; padding: 4px 4px 8px;
-            background: rgba(194,164,91,0.12);
-            border-radius: 6px;
-          }
-          .ptt-row {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            grid-template-rows: auto auto;
-            column-gap: 16px; row-gap: 2px;
-            padding: 18px 18px;
-            background: #29251F;
-            align-items: baseline;
-          }
-          .ptt-row:first-child { border-radius: 6px 6px 0 0; }
-          .ptt-row:last-child  { border-radius: 0 0 6px 6px; }
-          .ptt-row-target {
-            background: linear-gradient(90deg, rgba(194,164,91,0.12), rgba(194,164,91,0.06));
-          }
-          .ptt-row-label {
-            grid-column: 1; grid-row: 1;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 10px; font-weight: 600;
-            letter-spacing: 1.6px; text-transform: uppercase;
-            color: #A89F93;
-          }
-          .ptt-row-mcap {
-            grid-column: 1; grid-row: 2;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 12px; color: #8A8075;
-          }
-          .ptt-row-price {
-            grid-column: 2; grid-row: 1 / span 2;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px; font-weight: 500;
-            font-style: italic;
-            letter-spacing: -0.3px;
-            align-self: center;
-          }
+          .ptt-xaxis { height: 28px; }
+          .ptt-xlabel { font-size: 11px; }
+          .ptt-xlabel-full { display: none; }
+          .ptt-xlabel-short { display: inline; }
         }
       `}</style>
       </>
