@@ -769,7 +769,7 @@ export default function ProductiveMoney() {
             Etherealize is building the next generation of financial infrastructure on Ethereum{"\u2014"}trading, settlement, and privacy systems designed to move trillions in assets onchain. The firm works directly with banks, asset managers, sovereigns, and hedge funds to bring Ethereum into institutional portfolios, and represents Ethereum in Washington across the Treasury, SEC, Congress, and the White House.
           </p>
           <p>
-            Etherealize was co-founded by Vivek Raman and Danny Ryan. Danny Ryan was a core researcher at the Ethereum Foundation, where he led the coordination of Ethereum{"\u2019"}s transition to proof of stake.
+            Etherealize was co-founded by Vivek Raman, Danny Ryan, Grant Hummer, and Zach Obront. Danny Ryan was a core researcher at the Ethereum Foundation, where he led the coordination of Ethereum{"\u2019"}s transition to proof of stake.
           </p>
           <p>
             This paper was produced in collaboration with Bitmine, with Tom Lee of Fundstrat serving as an advisor.
